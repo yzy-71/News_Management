@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻管理</title>
+    <link rel="stylesheet" href="my-news-table.css">
+</head>
+<body>
+    <h1>新闻管理</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>标题</th>
+                <th>作者</th>
+                <th>发布日期</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>新闻标题1</td>
+                <td>作者1</td>
+                <td>2023-01-01</td>
+                <td><button class="delete-btn">删除</button></td>
+            </tr>
+            <tr>
+                <td>新闻标题2</td>
+                <td>作者2</td>
+                <td>2023-02-01</td>
+                <td><button class="delete-btn">删除</button></td>
+            </tr>
+            <!-- 可以添加多新闻 -->
+        </tbody>
+    </table>
+    <script>
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');
+                row.remove(); // 删除该行
+            });
+        });
+    </script>
+</body>
+</html>

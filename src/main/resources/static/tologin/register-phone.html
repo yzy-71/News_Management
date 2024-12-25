@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手机号注册</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>手机号注册</h2>
+        <form id="registerPhoneForm" enctype="multipart/form-data">
+            <label for="account">账号</label>
+            <input type="text" id="account" name="account" placeholder="请输入账号" required>
+            
+            <label for="username">用户名</label>
+            <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+            
+            <label for="phone">手机号</label>
+            <input type="text" id="phone" name="phone" placeholder="请输入手机号" required>
+            
+            <label for="phoneCode">验证码</label>
+            <div class="phone-code-wrapper">
+                <input type="text" id="phoneCode" name="phoneCode" placeholder="请输入验证码" required>
+                <button type="button" id="sendCode" class="btn" onclick="sendCode()">发送验证码</button>
+            </div>
+            
+           
+            <label for="role">身份</label>
+            <select id="role" name="role" required>
+                <option value="admin">管理员</option>
+                <option value="writer">作家</option>
+            </select>
+            
+            <label for="password">密码</label>
+            <input type="password" id="password" name="password" placeholder="设置密码" required>
+            
+            <label for="confirmPassword">确认密码</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="确认密码" required>
+            
+            <button type="submit" class="btn">注册</button>
+            <p>已有账号？<a href="login.html">去登录</a></p>
+
+        </form>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html> 

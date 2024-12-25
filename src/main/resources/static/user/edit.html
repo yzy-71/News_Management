@@ -1,0 +1,39 @@
+<meta charset="UTF-8">
+<h1>编辑新闻</h1>
+<form id="news-form"></form>
+    <!-- 表单内容 -->
+    <form id="news-form">
+        <div id="write-news" class="input-method">
+            <div class="form-group">
+                <label for="news-title">标题</label>
+                <input type="text" id="news-title" required>
+            </div>
+            <div class="form-group">
+                <label for="news-category">分类</label>
+                <select id="news-category">
+                    <option value="technology">科技</option>
+                    <option value="culture">文化</option>
+                    <option value="sports">体育</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="news-content">内容</label>
+                <textarea id="news-content" rows="10" required placeholder="在此输入新闻内容..."></textarea>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="button" class="save-draft">提交审核</button>
+            <button type="button" class="cancel">取消</button>
+        </div>
+
+        <!--可删除-->
+        <!--测试发送请求-->
+        <div style="margin: 10px 0;">
+            <label for="phone">手机号:</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" required>
+            <button type="button" id="sendCode" class="btn-code">发送验证码</button>
+        </div>
+    </form>
+</form>
+
+

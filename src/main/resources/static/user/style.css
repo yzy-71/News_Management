@@ -1,0 +1,80 @@
+/* 基本布局 */
+/* 基本布局 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+#nav-bar {
+    display: flex;
+    gap: 20px;
+}
+
+.module-name {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.module-name.active {
+    font-weight: bold;
+    color: #ff6600;
+}
+
+#user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+
+
+#user-details {
+    display: none; /* 默认隐藏 */
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#user-details p {
+    margin: 0 0 8px;
+    color: #333;
+    font-size: 14px;
+}
+
+#user-info:hover #user-avatar img {
+    transform: scale(1.1); /* 增加头像的放大效果 */
+}
+
+#user-info:hover #user-details {
+    display: block;
+    opacity: 1;
+    transform: translateY(10px); /* 显示时有点位移的效果 */
+    pointer-events: auto;
+}
+
+/* 其他样式略 */
+
+
+

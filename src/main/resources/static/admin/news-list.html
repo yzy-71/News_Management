@@ -1,0 +1,144 @@
+<meta charset="UTF-8">
+<title>新闻管理</title>
+<style>
+    table {
+           width: 100%;
+           border-collapse: collapse;
+       }
+       th, td {
+           border: 1px solid #ddd;
+           padding: 8px;
+           text-align: left;
+       }
+       th {
+           background-color: #f2f2f2;
+       }
+       .content {
+           display: none;
+           margin-top: 10px;
+           border: 1px solid #ddd;
+           padding: 10px;
+       }
+       body {
+           font-family: Arial, sans-serif;
+           background-color: #f9f9f9;
+           margin: 20px;
+       }
+       h1 {
+           color: #333;
+       }
+       button {
+           background-color: #4CAF50; /* Green */
+           color: white;
+           border: none;
+           padding: 10px 15px;
+           text-align: center;
+           text-decoration: none;
+           display: inline-block;
+           font-size: 16px;
+           margin: 4px 2px;
+           cursor: pointer;
+           border-radius: 5px;
+           transition: background-color 0.3s;
+       }
+       button:hover {
+           background-color: #45a049; /* Darker green */
+       }
+       table {
+           margin-top: 20px;
+       }
+       #searchInput {
+           padding: 10px;
+           margin-right: 10px;
+           border: 2px solid #D9534F; /* 更改为红色边框 */
+           border-radius: 5px;
+           background-color: #f9f9f9; /* 浅灰色背景 */
+           width: 200px; /* 固定宽度 */
+           transition: border-color 0.3s;
+       }
+       #searchInput:focus {
+           border-color: #D9534F; /* 聚焦时的边框颜色更改为红色 */
+           outline: none; /* 去掉默认的轮廓 */
+       }
+       .pagination {
+           margin-top: 20px;
+           display: flex;
+           align-items: center;
+           justify-content: center; /* 居中对齐 */
+       }
+       .pagination button {
+           margin: 0 15px; /* 增加按钮之间的间距 */
+           background-color: #D9534F; /* 更改为红色背景 */
+           color: white; /* 白色文字 */
+           border: none; /* 去掉边框 */
+           border-radius: 5px;
+           padding: 10px 15px;
+           cursor: pointer; /* 鼠标指针 */
+           transition: background-color 0.3s;
+       }
+       .pagination button:hover {
+           background-color: #c9443e; /* 鼠标悬停时的颜色 */
+       }
+       .pagination input {
+           width: 60px; /* 固定宽度 */
+           padding: 8px;
+           margin-left: 5px;
+           border: 2px solid #D9534F; /* 绿色边框 */
+           border-radius: 5px;
+           text-align: center; /* 文本居中 */
+       }
+       .pagination input:focus {
+           border-color: #D9534F; /* 聚焦时的边框颜色 */
+           outline: none; /* 去掉默认的轮廓 */
+       }
+</style>
+<script>
+   
+</script>
+
+<h1>所有新闻</h1>
+<!-- 添加搜索框和按钮 -->
+<div>
+    <input type="text" placeholder="搜索新闻..." id="searchInput">
+    <button style="background-color: #D9534F;" onclick="searchNews()">搜索</button>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>标题</th>
+            <th>作者</th>
+            <th>提交审核的日期</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <h3>新闻1</h3>
+            </td>
+            <td>作者1</td>
+            <td>2023-01-01</td>
+            <td><button onclick="deleteNews('新闻1')">删除新闻</button><button onclick="viewDetails('新闻1')">查看</button></td>
+        </tr>
+        <tr>
+            <td>
+                <h3>新闻2</h3>
+            </td>
+            <td>作者2</td>
+            <td>2023-02-01</td>
+            <td><button>删除新闻</button><button>查看</button></td>
+
+        </tr>
+        <!-- 可以添加更多待审核新闻 -->
+    </tbody>
+    <!-- 添加分页按钮 -->
+
+</table>
+<div class="pagination">
+    <button onclick="prevPage()">上一页</button>
+    <span>当前页: <span id="currentPage">1</span></span>
+    <button onclick="nextPage()">下一页</button>
+    <input type="number" id="jumpPageInput" placeholder="跳转到页数">
+    <button onclick="jumpToPage()">跳转</button>
+</div>

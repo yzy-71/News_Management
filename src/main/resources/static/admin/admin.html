@@ -1,0 +1,95 @@
+<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面布局</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #eaeaea;
+            height: 775px;
+        }
+        .left-panel {
+            width: 10%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 2px solid #ccc;
+        }
+        .right-panel {
+            width: 85%;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin-bottom: 20px;
+            border: 2px solid #007bff;
+        }
+        .username {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        .menu-item {
+            margin: 10px 0;
+            padding: 10px 15px;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: normal;
+            text-align: center;
+            font-size: 14px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+        .menu-item:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+    <script>
+        function loadModule(module) {
+            const rightPanel = document.querySelector('.right-panel');
+            fetch(module)
+                .then(response => response.text())
+                .then(data => {
+                    rightPanel.innerHTML = data;
+                })
+                .catch(error => {
+                    rightPanel.innerHTML = '<p>加载模块失败</p>';
+                    console.error('Error loading module:', error);
+                });
+        }
+
+        // 这里可以添加全局的功能，例如用户登录状态检查等
+    </script>
+</head>
+<body onload="loadModule('news-list.html')">
+    <div class="left-panel">
+    
+        <div class="username">用户名</div>
+        <div class="menu-item" onclick="loadModule('news-list.html')">新闻管理</div>
+        <div class="menu-item" onclick="loadModule('news-audit.html')">新闻审核</div>
+
+        <div class="menu-item" onclick="loadModule('user-list.html')">用户管理</div>
+    </div>
+    <div class="right-panel">
+        <!-- 右侧模块内容 -->
+    </div>
+</body>
+</html>

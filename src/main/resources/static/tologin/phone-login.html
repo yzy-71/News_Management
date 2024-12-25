@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手机号登录</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>手机号登录</h2>
+        <form id="phoneLoginForm">
+            <label for="phone">手机号</label>
+            <input type="text" id="phone" name="phone" placeholder="请输入手机号">
+            
+            <label for="phoneCode">验证码</label>
+            <div class="phone-code-wrapper">
+                <input type="text" id="phoneCode" name="phoneCode" placeholder="请输入验证码">
+                <button type="button" id="sendCode" class="btn" onclick="sendCode()">发送验证码</button>
+            </div>
+
+            <button type="submit" class="btn">登录</button>
+            <p>没有账号？<a href="register-phone.html">去注册</a></p>
+            <p><a href="login.html">账号登录</a></p>
+        </form>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html> 

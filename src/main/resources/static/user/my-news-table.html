@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="my-news-table.css">
+<script src="common.js"></script>
+
+<h3>我的新闻</h3>
+<div id="news-table">
+    <table  class="news-table">
+        <thead>
+            <tr>
+                <th>标题</th>
+                <th>时间</th>
+                <th>阅读量</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="news-row" data-module="module1">
+                <td>示例新闻标题</td>
+                <td>2023-10-01</td>
+                <td>-</td>
+                <td>审核中</td>
+                <td><button class="edit-btn" data-module="edit">编辑</button> <button class="delete-btn">删除</button></td>
+            </tr>
+            <tr class="news-row" data-module="module2">
+                <td>示例新闻标题</td>
+                <td>2023-10-01</td>
+                <td>-</td>
+                <td>审核通过</td>
+                <td><button class="edit-btn" data-module="edit">编辑</button> <button class="delete-btn">删除</button><button class="publish-btn">发布</button></td>
+            </tr>
+            <tr class="news-row" data-module="module3">
+                <td>示例新闻标题</td>
+                <td>2023-10-01</td>
+                <td>-</td>
+                <td>审核不通过</td>
+                <td><button class="edit-btn" data-module="edit">编辑</button> <button class="delete-btn">删除</button><button class="view-comment-btn">查看批语</button></td>
+            </tr>
+            <!-- 动态填充内容 -->
+        </tbody>
+    </table>
+    <div id="box">
+        
+    </div>
+</div>
