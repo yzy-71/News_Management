@@ -5,8 +5,8 @@ server:
 spring:
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/software_class3?&useSSL=false&serverTimezone=UTC&characterEncoding=utf8&characterSetResults=utf8
+    password: 20010720Lmx
+    url: jdbc:mysql://47.109.206.82/news_management?&useSSL=false&serverTimezone=UTC&characterEncoding=utf8&characterSetResults=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
   transaction:
     rollback-on-commit-failure: true
