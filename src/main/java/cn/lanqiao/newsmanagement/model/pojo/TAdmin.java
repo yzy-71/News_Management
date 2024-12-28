@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TAdmin {
-
   private String id;
   private String username;
   private String phone;

@@ -11,3 +11,14 @@ spring:
   transaction:
     rollback-on-commit-failure: true
     default-timeout: 30
+  data:
+    redis:
+      host: 192.168.88.128
+      port: 6379
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: 1000ms
+      database: 0
