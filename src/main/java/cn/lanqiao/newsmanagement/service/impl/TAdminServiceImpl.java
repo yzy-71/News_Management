@@ -30,10 +30,8 @@ public class TAdminServiceImpl implements TAdminService {
         System.out.println(tAdmin);
         if (tAdmin!=null){
             String phoneCode = RandomUtil.randomNumbers(6);
-            //模拟发送验证码给手机(验证码存在日志中)
             log.info("手机验证码发送:"+phoneCode);
-            //这里应该使用redis来存储(手机验证码应该设置为60s自动销毁)
-            //如果是写死的字符串或者数据，一般不会被直接应用到业务中
+            //使用redis来存储
             stringRedisTemplate.opsForValue().set(CAPTCHA_PREFIX+tAdmin.getPhone(),phoneCode,60L, TimeUnit.SECONDS);
             return tAdmin;
         }else {
@@ -45,6 +43,7 @@ public class TAdminServiceImpl implements TAdminService {
     @Override
     public int queryIdentity(TAdminQuery tAdminQuery) {
         int result = tAdminMapper.queryIdentity(tAdminQuery);
+        //0为管理员，1为用户
         if (result==0){
             return 0;
         }else {

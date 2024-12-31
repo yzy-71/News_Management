@@ -43,6 +43,7 @@ public class TAdminController {
         String verifyCode = tAdminQuery.getVerifyCode();
         //获取后台服务器生成的验证码
         String phoneCode = stringRedisTemplate.opsForValue().get(CAPTCHA_PREFIX + tAdminQuery.getPhone());
+        //判断用户身份
         if (verifyCode.equals(phoneCode)) {
             if (identity==0){
                 return new ResponseUtils<>(200,"手机验证码发送成功，是管理员");
