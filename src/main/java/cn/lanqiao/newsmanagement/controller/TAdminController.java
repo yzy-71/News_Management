@@ -41,6 +41,7 @@ public class TAdminController {
         //先判断验证码是否一致
         //获取用户输入的验证码
         String verifyCode = tAdminQuery.getVerifyCode();
+        System.out.println(identity);
         //获取后台服务器生成的验证码
         String phoneCode = stringRedisTemplate.opsForValue().get(CAPTCHA_PREFIX + tAdminQuery.getPhone());
         //判断用户身份
