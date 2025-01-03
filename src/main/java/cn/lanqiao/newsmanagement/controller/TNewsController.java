@@ -46,34 +46,33 @@ public class TNewsController {
             throw new RuntimeException(e);
         }
     }
-
-        /**
-         * 04-按分类查询新闻
-         */
-        @RequestMapping("/selectNewsBySort")
-        public ResponseUtils selectNewsBySort (String sort){
-            try {
-                List<TNews> tNewsList = tNewsService.selectNewsBySort(sort);
-                if (tNewsList != null) {
-                    List<TNews> newsVoList = new ArrayList<>();
-                    for (TNews news : tNewsList) {
-                        TNews newsVo = new TNews();
-                        newsVo.setId(news.getId());
-                        newsVo.setTitle(news.getTitle());
-                        newsVo.setUsername(news.getUsername());
-                        newsVo.setSort(news.getSort());
-                        newsVo.setContent(news.getContent());
-                        newsVo.setDate(news.getDate());
-                        newsVo.setRead(news.getRead());
-                        newsVoList.add(newsVo);
-                    }
-                    return new ResponseUtils(200, "查询成功", newsVoList);
-                } else {
-                    return new ResponseUtils(400, "查询失败");
+    /**
+     * 04-按分类查询新闻
+     */
+    @RequestMapping("/selectNewsBySort")
+    public ResponseUtils selectNewsBySort (String sort){
+        try {
+            List<TNews> tNewsList = tNewsService.selectNewsBySort(sort);
+            if (tNewsList != null) {
+                List<TNews> newsVoList = new ArrayList<>();
+                for (TNews news : tNewsList) {
+                    TNews newsVo = new TNews();
+                    newsVo.setId(news.getId());
+                    newsVo.setTitle(news.getTitle());
+                    newsVo.setUsername(news.getUsername());
+                    newsVo.setSort(news.getSort());
+                    newsVo.setContent(news.getContent());
+                    newsVo.setDate(news.getDate());
+                    newsVo.setRead(news.getRead());
+                    newsVoList.add(newsVo);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
+                return new ResponseUtils(200, "查询成功", newsVoList);
+            } else {
+                return new ResponseUtils(200, "该分类暂无数据", null);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseUtils(500, "查询失败：" + e.getMessage());
         }
     }
+}
