@@ -58,31 +58,126 @@
 #search-btn:hover {
     background: #0056b3; /* 鼠标悬停时的背景颜色 */
 }
+/*#news-list {*/
+/*    display: grid;*/
+/*    grid-template-columns: 1fr 1fr 1fr;*/
+/*    gap: 20px;*/
+/*}*/
+
+/*.news-item {*/
+/*    padding: 15px;*/
+/*    border-bottom: 1px solid #eee;*/
+/*    cursor: pointer;*/
+/*    border-radius: 10px; !* 增加圆角 *!*/
+/*    transition: box-shadow 0.3s; !* 添加过渡效果 *!*/
+/*    background-color: #ffffff; !* 添加背景颜色 *!*/
+/*    border: 1px solid #e0e0e0; !* 添加边框 *!*/
+/*    margin: 10px 0; !* 添加上下间距 *!*/
+/*}*/
+
+/*.news-item:hover {*/
+/*    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); !* 鼠标悬停时增加阴影 *!*/
+/*}*/
+
+/*滚动条修改的部分*/
 #news-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    overflow-y: hidden; /* 默认隐藏滚动条 */
+    padding: 20px;
+}
+
+#news-list:hover {
+    overflow-y: auto; /* 鼠标移入时显示滚动条 */
+}
+
+/* 美化滚动条样式 */
+#news-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#news-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#news-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#news-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .news-item {
     padding: 15px;
     border-bottom: 1px solid #eee;
     cursor: pointer;
-    border-radius: 10px; /* 增加圆角 */
-    transition: box-shadow 0.3s; /* 添加过渡效果 */
-    background-color: #ffffff; /* 添加背景颜色 */
-    border: 1px solid #e0e0e0; /* 添加边框 */
-    margin: 10px 0; /* 添加上下间距 */
+    border-radius: 10px;
+    transition: box-shadow 0.3s;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    margin: 10px 0;
+    height: 200px; /* 设置固定高度 */
+    overflow-y: hidden; /* 默认隐藏滚动条 */
 }
+
 
 .news-item:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 鼠标悬停时增加阴影 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* 鼠标悬停时显示滚动条 */
 }
 
+/* 美化新闻项滚动条样式 */
+.news-item::-webkit-scrollbar {
+    width: 6px;
+}
+
+.news-item::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.news-item::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.news-item::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+/*原来的*/
 .news-item h3 {
     margin: 0 0 10px 0;
     color: #333;
 }
+
+
+
+.news-item h4 {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.news-item h6 {
+    margin: 5px 0;
+    color: #999;
+    font-size: 12px;
+}
+
+.news-item p {
+    margin: 10px 0 0 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+
 
 .news-meta {
     font-size: 12px;
@@ -94,11 +189,11 @@
     margin-right: 15px;
 }
 
-.news-item p {
-    margin: 0;
-    color: #666;
-    line-height: 1.5;
-}
+/*.news-item p {*/
+/*    margin: 0;*/
+/*    color: #666;*/
+/*    line-height: 1.5;*/
+/*}*/
 #pagination {
     display: flex;
     justify-content: space-between;
@@ -172,10 +267,19 @@
     padding: 10px 15px; /* 内边距 */
     cursor: pointer; /* 鼠标指针样式 */
     transition: background-color 0.3s; /* 添加过渡效果 */
+    /*添加的*/
+    min-width: 80px;
+    transition: all 0.3s ease;
 }
 
 .category-btn:hover {
     background-color: #0056b3; /* 鼠标悬停时的背景颜色 */
+}
+/*添加的*/
+.category-btn.active {
+    background-color: #0056b3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
 }
 
 .button {
@@ -195,5 +299,79 @@
 
 
 /* 更新具体按钮的类 */
+
+
+
+/* 新闻容器样式 */
+.news-container {
+    height: 500px; /* 固定高度 */
+    overflow: hidden; /* 默认隐藏溢出内容 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    margin-left: 220px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.news-container:hover {
+    overflow-y: auto; /* 鼠标移入时显示垂直滚动条 */
+}
+
+/* 美化滚动条样式 */
+.news-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.news-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.news-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.news-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* 新闻项样式 */
+.news-item {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.news-item h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 20px;
+}
+
+.news-item h4 {
+    margin: 8px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.news-item h6 {
+    margin: 8px 0;
+    color: #999;
+    font-size: 12px;
+}
+
+.news-item p {
+    margin: 15px 0 0 0;
+    color: #666;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+
 
 

@@ -77,4 +77,74 @@ header {
 /* 其他样式略 */
 
 
+/*!* 新闻容器样式 *!*/
+.news-container {
+    height: 500px; /* 固定高度 */
+    overflow: hidden; /* 默认隐藏溢出内容 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    margin-left: 220px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.news-container:hover {
+    overflow-y: auto; /* 鼠标移入时显示垂直滚动条 */
+}
+
+/* 美化滚动条样式 */
+.news-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.news-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.news-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.news-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* 新闻项样式 */
+.news-item {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.news-item h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 20px;
+}
+
+.news-item h4 {
+    margin: 8px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.news-item h6 {
+    margin: 8px 0;
+    color: #999;
+    font-size: 12px;
+}
+
+.news-item p {
+    margin: 15px 0 0 0;
+    color: #666;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
 
