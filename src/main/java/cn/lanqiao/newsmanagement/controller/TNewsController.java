@@ -21,9 +21,44 @@ public class TNewsController {
      * 03-加载新闻数据
      */
     @RequestMapping("/selectAllNews")
-    public ResponseUtils selectAllNews() {
+    public ResponseUtils selectAllNews(Integer pageNum,Integer pageSize) {
         try {
-            List<TNews> tNewsList = tNewsService.selectAllNews();
+            List<TNews> tNewsList = tNewsService.selectAllNews(pageNum,pageSize); //ct
+            Integer total =tNewsService.selectNewsTotal();
+            if (tNewsList != null) {
+                List<TNews> newsVoList = new ArrayList<>();
+                for (TNews news : tNewsList) {
+                    TNews newsVo = new TNews();
+                    newsVo.setId(news.getId());
+                    newsVo.setTitle(news.getTitle());
+                    newsVo.setUsername(news.getUsername());
+                    newsVo.setSort(news.getSort());
+                    newsVo.setContent(news.getContent());
+                    newsVo.setDate(news.getDate());
+                    newsVo.setRead(news.getRead());
+                    newsVoList.add(newsVo);
+                }
+                return new ResponseUtils(200, "查询成功", newsVoList,total);
+            } else {
+                return new ResponseUtils(400, "查询失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    //ct
+    @RequestMapping("/selectNews")
+    public ResponseUtils selectNewsByTitle(String title,Integer pageNum,Integer pageSize) {
+        System.out.println("title = " + title);
+        List<TNews> tNewsList = null;
+        try {
+            if (!title.equals("")){
+                tNewsList = tNewsService.selectNewsByTitle(title);
+            }else {
+                tNewsList = tNewsService.selectAllNews(pageNum, pageSize);
+            }
             if (tNewsList != null) {
                 List<TNews> newsVoList = new ArrayList<>();
                 for (TNews news : tNewsList) {
@@ -46,6 +81,8 @@ public class TNewsController {
             throw new RuntimeException(e);
         }
     }
+    //ct
+
     /**
      * 04-按分类查询新闻
      */
