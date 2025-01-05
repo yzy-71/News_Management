@@ -3,6 +3,8 @@ package cn.lanqiao.newsmanagement.service.impl;
 import cn.hutool.core.util.RandomUtil;
 import cn.lanqiao.newsmanagement.mapper.TAdminMapper;
 import cn.lanqiao.newsmanagement.model.dto.TAdminQuery;
+//import cn.lanqiao.newsmanagement.model.dto.tadmin.TAdminAdd;
+import cn.lanqiao.newsmanagement.model.dto.tadmin.TAdminAdd;
 import cn.lanqiao.newsmanagement.model.pojo.TAdmin;
 import cn.lanqiao.newsmanagement.service.TAdminService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.xml.transform.Result;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import static cn.lanqiao.newsmanagement.model.common.CommonUse.CAPTCHA_PREFIX;
@@ -50,4 +56,57 @@ public class TAdminServiceImpl implements TAdminService {
             return 1;
         }
     }
+
+
+    /**
+     * 登录功能
+     */
+    @Override
+    public TAdmin login(TAdminQuery tAdminQuery) {
+        TAdmin result = tAdminMapper.login(tAdminQuery);
+        if (result !=null){
+            return  result;
+        }else {
+            return null;
+        }
+    }
+
+    /**
+     * 注册功能
+     */
+    @Override
+    public int register(TAdminAdd tAdminAdd) {
+        try {
+            // 1. 创建新用户对象
+            TAdmin tAdmin = new TAdmin();
+            tAdmin.setId(UUID.randomUUID().toString());
+            tAdmin.setUsername(tAdminAdd.getUsername());
+            tAdmin.setPhone(tAdminAdd.getPhone());
+            tAdmin.setPassword(tAdminAdd.getPassword());
+            tAdmin.setIdentity(tAdminAdd.getIdentity());
+            tAdmin.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            tAdmin.setIsDelete(0L);
+
+            // 2. 执行注册
+            return tAdminMapper.register(tAdmin);
+        } catch (Exception e) {
+            log.error("注册失败", e);
+            return 0;
+        }
+    }
+
+
+    @Override
+    public TAdmin queryByPhoneTwo(String phone) {
+        try {
+            // 只查询手机号是否存在，不生成验证码
+            return tAdminMapper.queryByPhone(phone);
+        } catch (Exception e) {
+            log.error("查询手机号失败", e);
+            return null;
+        }
+    }
+
 }
+
+
