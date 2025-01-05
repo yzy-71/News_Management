@@ -7,7 +7,9 @@
     <title>模块化页面</title>
     <link rel="stylesheet" href="style.css">
     <script src="common.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <script src="../js/axios.min.js"></script>
+
 </head>
 <body>
     <header>
@@ -17,15 +19,48 @@
         </div>
         <div id="user-info">
             <div id="user-avatar">
-                <h4>用户名<h4>
+                <h4>用户名</h4>
             </div>
         </div>
     </header>
-
-<div id="contentox">
-    <!-- 动态加载模块内容 -->
-</div>
+    <div id="contentox">
+        <!-- 新闻模块内容 -->
+        <div id="news-page" class="module-page">
+            <h2 style="text-align: center; color: #333;">最新新闻</h2>
+            <!-- 侧边栏 -->
+            <div id="sidebar">
+                <ul>
+                    <li><button class="category-btn button" data-category="technology">科技</button></li>
+                    <li><button class="category-btn button" data-category="culture">文化</button></li>
+                    <li><button class="category-btn button" data-category="sports">体育</button></li>
+                </ul>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="news-search" placeholder="搜索新闻标题或作者..." aria-label="搜索新闻">
+                <button id="search-btn" class="button">搜索</button>
+            </div>
+            <div id="news-list">
+                <!-- 新闻列表将通过Ajax动态加载 -->
+            </div>
+            <div id="pagination">
+                <button id="prev-page" class="page-btn button">上一页</button>
+                <!--<span id="page-info">第 1 页 / 共 10 页</span>-->
+                <span id="page-info"> </span> <!-- ct -->
+                <input type="number" id="page-input" class="page-input" min="1" placeholder="跳转到页">
+                <button id="go-to-page" class="page-btn button">跳转</button>
+                <button id="next-page" class="page-btn button">下一页</button>
+            </div>
+        </div>
+        <!-- 工作站模块内容 -->
+        <div id="workstation-page" class="module-page" style="display: none;">
+            <!-- 这里放工作站的内容 -->
+            <h2 style="text-align: center; color: #333;">工作站</h2>
+            <!-- 工作站的其他内容 -->
+        </div>
+    </div>
+    <script src="index_news.js"></script>
 </body>
 </html>
+
 
 
