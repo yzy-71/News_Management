@@ -2,7 +2,7 @@
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
-    loadNews(); // 默认加载所有新闻
+    loadNews(0); // 默认加载所有新闻 //ct
 
     // 使用事件委托，将点击事件绑定到父元素上
     document.getElementById('contentox').addEventListener('click', function(event) {
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (button.classList.contains('active')) {
                 // 如果按钮已激活，取消激活并显示所有新闻
                 button.classList.remove('active');
-                loadNews();
+                loadNews(0); //ct
             } else {
                 // 移除其他按钮的active类
                 allButtons.forEach(btn => btn.classList.remove('active'));
@@ -44,13 +44,140 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    //ct
+    // 搜索
+    document.body.addEventListener('click', function(event) {
+        if (event.target.id === 'search-btn') {
+            selectNews(0)
+        }
+    });
+
+    // 上一页
+    document.body.addEventListener('click', function(event) {
+        if (event.target.id === 'prev-page') {
+            let pageInfo = document.getElementById('page-info')
+            let pageInfoText = pageInfo.innerText
+            // 使用正则表达式匹配页码
+            const regex = /第 (\d+) 页 \/ 共 (\d+) 页/;
+            const match = pageInfoText.match(regex);
+
+            if (match) {
+                // 如果匹配成功，提取当前页码和总页数
+                let currentPage = parseInt(match[1], 10);
+                const totalPages = parseInt(match[2], 10);
+
+                if (currentPage>0) {
+                    // currentPage -= 1
+                    loadNews(currentPage-2)
+                    pageInfo.innerText = `第 ${currentPage} 页 / 共 ${totalPages} 页`
+                }else {
+                    console.log("页码错误...")
+                }
+            } else {
+                console.log("没有匹配到页码信息");
+            }
+        }
+    });
+
+    // 下一页
+    document.body.addEventListener('click', function(event) {
+        if (event.target.id === 'next-page') {
+            let pageInfo = document.getElementById('page-info')
+            let pageInfoText = pageInfo.innerText
+            // 使用正则表达式匹配页码
+            const regex = /第 (\d+) 页 \/ 共 (\d+) 页/;
+            const match = pageInfoText.match(regex);
+
+            if (match) {
+                // 如果匹配成功，提取当前页码和总页数
+                let currentPage = parseInt(match[1], 10);
+                const totalPages = parseInt(match[2], 10);
+
+                if (currentPage<Math.ceil(totalPages / 3)) {
+                    loadNews(currentPage)
+                    currentPage += 1
+                    console.log(currentPage)
+                    pageInfo.innerText = `第 ${currentPage} 页 / 共 ${totalPages} 页`
+                }
+            } else {
+                console.log("没有匹配到页码信息");
+            }
+        }
+    });
+
+    // 跳转
+    document.body.addEventListener('click', function(event) {
+        if (event.target.id === 'go-to-page') {
+            let pageInfo = document.getElementById('page-info')
+            let pageInput = document.getElementById('page-input')
+            let pageInfoText = pageInfo.innerText
+            let pageInputText = pageInput.value
+            // 使用正则表达式匹配页码
+            const regex = /第 (\d+) 页 \/ 共 (\d+) 页/;
+            const match = pageInfoText.match(regex);
+            console.log('pageInputText--->',pageInputText)
+            if (match) {
+                // 如果匹配成功，提取当前页码和总页数
+                let currentPage = parseInt(match[1], 10);
+                const totalPages = parseInt(match[2], 10);
+
+                if (pageInputText>0 && pageInputText<=Math.ceil(totalPages / 3)) {
+                    loadNews(pageInputText-1)
+                    pageInfo.innerText = `第 ${ pageInputText } 页 / 共 ${ totalPages } 页`
+                }else {
+                    console.log("页码错误...")
+                }
+
+            } else {
+                console.log("没有匹配到页码信息");
+            }
+        }
+    });
+    //ct
 });
 
 // 加载新闻数据的函数
-function loadNews() {
+function loadNews(pageNum) {
     axios({
         url: 'http://localhost:8080/news/selectAllNews',
-        method: 'get'
+        method: 'get',
+        //ct
+        params:{
+            pageNum: pageNum,
+            pageSize: 3
+        }
+        //ct
+    }).then(result => {
+        if (result.data.code === 200) {
+            if (result.data.data) {
+                //ct
+                if (pageNum === 0){
+                    renderNewsTotal(result.data.total)
+                }
+                //ct
+                renderNewsList(result.data.data);
+            } else {
+                document.getElementById('news-list').innerHTML = '<div class="news-item">暂无新闻</div>';
+            }
+        } else {
+            console.error('加载新闻失败：', result.data.msg);
+        }
+    }).catch(error => {
+        console.error('请求失败：', error);
+    });
+}
+//ct
+function selectNews(pageNum) {
+    let title = document.getElementById('news-search').value
+    // console.log('title-->',title)
+    axios({
+        url: 'http://localhost:8080/news/selectNews',
+        method: 'get',
+        params: {
+            title: title,
+            pageNum: pageNum,
+            pageSize: 3
+        }
     }).then(result => {
         if (result.data.code === 200) {
             if (result.data.data) {
@@ -65,7 +192,7 @@ function loadNews() {
         console.error('请求失败：', error);
     });
 }
-
+//ct
 // 渲染新闻列表
 function renderNewsList(newsList) {
     const newsListElement = document.getElementById('news-list');
@@ -87,7 +214,13 @@ function renderNewsList(newsList) {
         newsListElement.appendChild(newsItem);
     });
 }
-
+//ct
+// 渲染新闻总条数
+function renderNewsTotal(total) {
+    let pageInfo = document.getElementById('page-info')
+    pageInfo.innerHTML = `第 1 页 / 共 ${total} 页`;
+}
+//ct
 // 加载分类新闻
 function loadNewsBySort(sort) {
     let sortType;
