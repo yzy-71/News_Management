@@ -308,9 +308,16 @@ document.getElementById('module-news').addEventListener('click', function() {
             </div>
         </div>
     `;
-
     // 加载新闻
-    loadNews();
+    loadNews(0);
+});
+
+// 在搜索时保存搜索内容
+document.body.addEventListener('click', function(event) {
+    if (event.target.id === 'search-btn') {
+        const searchQuery = document.getElementById('news-search').value;
+        sessionStorage.setItem('searchQuery', searchQuery);
+    }
 });
 
 // 工作站模块切换
