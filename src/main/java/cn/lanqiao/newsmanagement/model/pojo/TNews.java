@@ -18,4 +18,5 @@ public class TNews {
     private String date;
     private long isDelete;
     private long read;
+    private int userId;
 }
