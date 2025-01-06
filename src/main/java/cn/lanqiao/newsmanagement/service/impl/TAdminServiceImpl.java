@@ -57,16 +57,24 @@ public class TAdminServiceImpl implements TAdminService {
         }
     }
 
-
     /**
      * 登录功能
      */
     @Override
     public TAdmin login(TAdminQuery tAdminQuery) {
-        TAdmin result = tAdminMapper.login(tAdminQuery);
-        if (result !=null){
-            return  result;
-        }else {
+        try {
+            // 1. 先执行登录查询
+            TAdmin result = tAdminMapper.login(tAdminQuery);
+
+            if (result != null) {
+                // 2. 如果登录成功，更新user_id
+                tAdminMapper.updateUserId(tAdminQuery);
+                return result;
+            }
+
+            return null;
+        } catch (Exception e) {
+            log.error("登录失败", e);
             return null;
         }
     }
@@ -107,6 +115,19 @@ public class TAdminServiceImpl implements TAdminService {
         }
     }
 
+
+    @Override
+    public boolean isUsernameExists(String username) {
+        try {
+            return tAdminMapper.countByUsername(username) > 0;
+        } catch (Exception e) {
+            log.error("查询用户名失败", e);
+            return false;
+        }
+    }
+
 }
+
+
 
 

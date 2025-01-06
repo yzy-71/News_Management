@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -117,9 +118,38 @@
             });
         });
 
-        // 注册按钮事件监听
+        // 添加用户名输入框的失去焦点事件
+        document.getElementById('username').addEventListener('blur', function() {
+            const username = this.value.trim();
+            if (!username) {
+                return;
+            }
+
+            // 发送请求验证用户名
+            axios({
+                method: 'post',
+                url: '/tAdmin/checkUsername',
+                data: {
+                    username: username
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (response.data.code === 500) {
+                        alert(response.data.msg);
+                        this.value = ''; // 清空用户名输入
+                        this.focus();    // 重新获取焦点
+                    }
+                })
+                .catch(error => {
+                    console.error('检查用户名失败:', error);
+                });
+        });
+
+        // 修改注册按钮事件处理，添加用户名验证
         document.getElementById('registerBtn').addEventListener('click', function() {
-            // 获取表单数据
             const username = document.getElementById('username').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const phoneCode = document.getElementById('phoneCode').value.trim();
@@ -138,23 +168,34 @@
                 return;
             }
 
-            // 构造请求数据
-            const data = {
-                username: username,
-                phone: phone,
-                phoneCode: phoneCode,
-                role: role,
-                password: password,
-                confirmPassword: confirmPassword
-            };
-
-            // 发送注册请求
-            axios.post('/tAdmin/register', data)
+            // 先检查用户名是否可用
+            axios.post('/tAdmin/checkUsername', {
+                username: username
+            })
                 .then(response => {
-                    if (response.data.code === 200) {
+                    if (response.data.code === 500) {
+                        alert(response.data.msg);
+                        return;
+                    }
+
+                    // 用户名可用，继续注册流程
+                    const data = {
+                        username: username,
+                        phone: phone,
+                        phoneCode: phoneCode,
+                        role: role,
+                        password: password,
+                        confirmPassword: confirmPassword
+                    };
+
+                    // 发送注册请求
+                    return axios.post('/tAdmin/register', data);
+                })
+                .then(response => {
+                    if (response && response.data.code === 200) {
                         alert('注册成功');
                         window.location.href = '/tologin/login.html';
-                    } else {
+                    } else if (response) {
                         alert(response.data.msg);
                     }
                 })
