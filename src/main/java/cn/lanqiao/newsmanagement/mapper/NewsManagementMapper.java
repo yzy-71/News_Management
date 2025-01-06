@@ -19,7 +19,7 @@ public interface NewsManagementMapper {
     @Select("select COUNT(*) from t_news where title like CONCAT('%', '新闻', '%') and is_delete = 0 and audit = 2")
     int fuzzyTotalNewsNum(TNews tNews);
 
-    //模糊查询新闻, 分页查询
+    //模糊查询新闻
     @Select("select  title,username,date  from t_news where title like CONCAT('%', '新闻', '%') and is_delete = 0 and audit = 2")
     List<TNews> fuzzyQueryNews(String title,String username,String date,int pageNum, int pageSize, int offset);
 }

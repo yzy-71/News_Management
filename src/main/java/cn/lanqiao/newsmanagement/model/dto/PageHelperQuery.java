@@ -3,6 +3,7 @@ package cn.lanqiao.newsmanagement.model.dto;
 import lombok.Data;
 
 @Data
+
 public class PageHelperQuery {
     //当前页码，表示用户请求的页数
     private Integer pageNum;

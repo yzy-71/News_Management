@@ -21,7 +21,7 @@ public class NewsManagementController {
         PageHelper<TNews> pageHelper = newsManagementService.pageList(pageHelperQuery.getTitle(), pageHelperQuery.getUsername(), pageHelperQuery.getDate(), pageHelperQuery.getPageNum(), pageHelperQuery.getPageSize());
         return new ResponseUtils<>(200,"分页查询成功",pageHelper);
     }
-    //模糊查询新闻, 分页查询
+    //模糊查询新闻
     @RequestMapping("/fuzzyList")
     public ResponseUtils fuzzyQueryNews(@RequestBody PageHelperQuery pageHelperQuery) {
         PageHelper<TNews> pageHelper = newsManagementService.fuzzyQueryNews(pageHelperQuery.getTitle(), pageHelperQuery.getUsername(), pageHelperQuery.getDate(), pageHelperQuery.getPageNum(), pageHelperQuery.getPageSize());

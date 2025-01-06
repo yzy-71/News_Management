@@ -32,7 +32,6 @@ public class NewsManagementServiceImpl implements NewsManagementService {
         pageHelper.setList(tNews);
         return pageHelper;
     }
-
     @Override
     public PageHelper<TNews> fuzzyQueryNews(String title, String username, String date, int pageNum, int pageSize) {
         //一共有多少条数据
