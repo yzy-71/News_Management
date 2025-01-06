@@ -1,12 +1,21 @@
 package cn.lanqiao.newsmanagement.mapper;
 
 import cn.lanqiao.newsmanagement.model.pojo.TNews;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
 public interface TNewsMapper {
 
+  @Update("UPDATE t_news SET remarks = #{remarks} WHERE id = #{id}")
+  int updateRemarks(@Param("id") String id, @Param("remarks") String remarks);
+  @Update("UPDATE t_news SET audit=3 WHERE id=#{id} ")
+  Integer updateAuditno(String id);
+
+    @Update("UPDATE t_news SET audit=1 WHERE id=#{id} ")
+    Integer updateAudit(String id);
     //ct
     @Select("SELECT COUNT(*) FROM t_news;")
     Integer selectNewsTotal();

@@ -75,16 +75,18 @@
                     console.error('Error loading module:', error);
                 });
         }
-
+        function goPage() {
+          window.location.href="news-audit.html";
+        }
         // 这里可以添加全局的功能，例如用户登录状态检查等
     </script>
 </head>
 <body onload="loadModule('news-list.html')">
     <div class="left-panel">
-    
+
         <div class="username">用户名</div>
         <div class="menu-item" onclick="loadModule('news-list.html')">新闻管理</div>
-        <div class="menu-item" onclick="loadModule('news-audit.html')">新闻审核</div>
+        <div class="menu-item" onclick="goPage()">新闻审核</div>
 
         <div class="menu-item" onclick="loadModule('user-list.html')">用户管理</div>
     </div>

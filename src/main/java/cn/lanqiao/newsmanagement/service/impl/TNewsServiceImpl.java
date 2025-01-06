@@ -18,7 +18,23 @@ public class TNewsServiceImpl implements TNewsService {
     public Integer selectNewsTotal() {
         return tNewsMapper.selectNewsTotal();
     }
-    //ct
+
+  @Override
+  public Integer updateAudit(String id) {
+    return tNewsMapper.updateAudit(id);
+  }
+
+  @Override
+  public Integer updateAuditno(String id) {
+    return tNewsMapper.updateAuditno(id);
+  }
+
+  @Override
+  public Object updateRemarks(String id, String remarks) {
+    return tNewsMapper.updateRemarks(id,remarks);
+  }
+
+  //ct
     //查询新闻类别功能
     @Override
     public List<TNews> selectAllNews(Integer pageNum,Integer pageSize) { //ct

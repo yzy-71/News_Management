@@ -1,7 +1,6 @@
 package cn.lanqiao.newsmanagement.service;
 
 import cn.lanqiao.newsmanagement.model.pojo.TNews;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -17,5 +16,11 @@ public interface TNewsService {
     List<TNews> selectNewsByTitle(String title);
 
     Integer selectNewsTotal();
-    //ct
+
+  Integer updateAudit(String id);
+
+  Integer updateAuditno(String id);
+
+  Object updateRemarks(String id, String remarks);
+  //ct
 }
