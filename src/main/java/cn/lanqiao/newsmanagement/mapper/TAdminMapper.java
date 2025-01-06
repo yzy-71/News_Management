@@ -26,12 +26,17 @@ public interface TAdminMapper {
     /**
      * 注册新用户
      */
-    @Insert("INSERT INTO t_admin (id, username, phone, password, identity, date, is_delete) " +
-            "VALUES (#{id}, #{username}, #{phone}, #{password}, #{identity}, #{date}, 0)")
+    @Insert("INSERT INTO t_admin ( username, phone, password, identity, date, is_delete,user_id) " +
+            "VALUES ( #{username}, #{phone}, #{password}, #{identity}, #{date}, 0, 1)")
     int register(TAdmin tAdmin);
 
     @Select("select * from t_admin where phone =#{phone} and is_delete=0")
     TAdmin queryByPhoneTwo(String phone);
 
+    @Select("select * from t_admin where username = #{username} and is_delete = 0")
+    TAdmin queryByUsername(String username);
+
+    @Select("select count(*) from t_admin where username = #{username} and is_delete = 0")
+    int countByUsername(String username);
 
 }

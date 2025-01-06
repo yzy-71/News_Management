@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 import static cn.lanqiao.newsmanagement.model.common.CommonUse.CAPTCHA_PREFIX;
+import static org.apache.el.lang.ELArithmetic.add;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,26 +66,48 @@ public class TAdminController {
         }
     }
 
+//
+//    /**
+//     * 登录功能
+//     */
+//    @RequestMapping("/login")
+//    public ResponseUtils login(@RequestBody TAdminQuery tAdminQuery) {
+//        try {
+//            TAdmin userLogin = tAdminService.login(tAdminQuery);
+//            if (userLogin != null) {
+//                //登录成功
+//                return new ResponseUtils(200, "登录成功");
+//            }else {
+//                //登录失败
+//                return new ResponseUtils(500, "登录失败");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     /**
      * 登录功能
      */
+
     @RequestMapping("/login")
     public ResponseUtils login(@RequestBody TAdminQuery tAdminQuery) {
         try {
             TAdmin userLogin = tAdminService.login(tAdminQuery);
             if (userLogin != null) {
-                //登录成功
-                return new ResponseUtils(200, "登录成功");
-            }else {
-                //登录失败
+                // 登录成功，返回用户身份
+                return new ResponseUtils(200, "登录成功", userLogin.getIdentity());
+            } else {
+                // 登录失败
                 return new ResponseUtils(500, "登录失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
+            return new ResponseUtils(500, "登录失败：" + e.getMessage());
         }
     }
+
 
     /**
      * 验证码功能
@@ -164,4 +187,29 @@ public class TAdminController {
             return new ResponseUtils<>(500, "注册失败：" + e.getMessage());
         }
     }
+
+
+    @RequestMapping("/checkUsername")
+    public ResponseUtils checkUsername(@RequestBody TAdminQuery tAdminQuery) {
+        try {
+            // 验证用户名格式
+            if (tAdminQuery.getUsername() == null || tAdminQuery.getUsername().trim().isEmpty()) {
+                return new ResponseUtils<>(500, "用户名不能为空");
+            }
+
+            // 查询用户名是否存在
+            boolean exists = tAdminService.isUsernameExists(tAdminQuery.getUsername());
+            if (exists) {
+                return new ResponseUtils<>(500, "该用户名已被使用");
+            }
+
+            return new ResponseUtils<>(200, "用户名可用");
+        } catch (Exception e) {
+            log.error("检查用户名失败", e);
+            return new ResponseUtils<>(500, "检查用户名失败");
+        }
+    }
 }
+
+
+
