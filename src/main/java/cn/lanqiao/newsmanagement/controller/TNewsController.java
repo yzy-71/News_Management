@@ -5,8 +5,7 @@ import cn.lanqiao.newsmanagement.service.TNewsService;
 import cn.lanqiao.newsmanagement.utils.ResponseUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +20,11 @@ public class TNewsController {
      * 03-加载新闻数据
      */
     @RequestMapping("/selectAllNews")
-    public ResponseUtils selectAllNews(Integer pageNum, Integer pageSize) {
+    public ResponseUtils selectAllNews(Integer pageNum,Integer pageSize) {
         try {
-            List<TNews> tNewsList = tNewsService.selectAllNews(pageNum, pageSize);
-            Integer total = tNewsService.selectNewsTotal();
+            List<TNews> tNewsList = tNewsService.selectAllNews(pageNum,pageSize); //ct
+            Integer total =tNewsService.selectNewsTotal();
+            total=(total + pageSize - 1) / pageSize;
             if (tNewsList != null) {
                 List<TNews> newsVoList = new ArrayList<>();
                 for (TNews news : tNewsList) {
@@ -38,17 +38,15 @@ public class TNewsController {
                     newsVo.setRead(news.getRead());
                     newsVoList.add(newsVo);
                 }
-                return new ResponseUtils(200, "查询成功", newsVoList, total);
+                return new ResponseUtils(200, "查询成功", newsVoList,total);
             } else {
-                return new ResponseUtils(200, "暂无审核通过的新闻", null);
+                return new ResponseUtils(400, "查询失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseUtils(500, "查询失败：" + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
-
-
 
     //ct
     @RequestMapping("/selectNews")
@@ -114,4 +112,16 @@ public class TNewsController {
             return new ResponseUtils(500, "查询失败：" + e.getMessage());
         }
     }
+    @RequestMapping("/updateAudit")
+    public Integer updateA(String id){
+      return tNewsService.updateAudit(id);
+    }
+    @RequestMapping("/updateAuditno")
+  public Integer updateB(String id){
+      return tNewsService.updateAuditno(id);
+    }
+  @PostMapping("/remarks")
+  public ResponseUtils updateNewsRemakrs(String id, @RequestParam String remarks){
+      return new ResponseUtils(200,"更新成功",tNewsService.updateRemarks(id,remarks));
+  }
 }
