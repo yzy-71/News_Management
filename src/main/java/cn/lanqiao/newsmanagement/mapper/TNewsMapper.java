@@ -47,7 +47,6 @@ public interface TNewsMapper {
     //按标题查询新闻（只查询审核通过的）
     @Select("SELECT * FROM t_news WHERE is_delete = 0 AND audit = 1 AND title LIKE CONCAT('%', #{title}, '%') ORDER BY date DESC")
     List<TNews> selectNewsByTitle(String title);
-
     //按分类查询新闻（只查询审核通过的）
     @Select("SELECT n.*, s.sort_name as sort " +
             "FROM t_news n " +

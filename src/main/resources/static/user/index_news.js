@@ -312,6 +312,7 @@ document.getElementById('module-news').addEventListener('click', function() {
     loadNews(0);
 });
 
+
 // 在搜索时保存搜索内容
 document.body.addEventListener('click', function(event) {
     if (event.target.id === 'search-btn') {
