@@ -21,10 +21,10 @@ public class TNewsController {
      * 03-加载新闻数据
      */
     @RequestMapping("/selectAllNews")
-    public ResponseUtils selectAllNews(Integer pageNum,Integer pageSize) {
+    public ResponseUtils selectAllNews(Integer pageNum, Integer pageSize) {
         try {
-            List<TNews> tNewsList = tNewsService.selectAllNews(pageNum,pageSize); //ct
-            Integer total =tNewsService.selectNewsTotal();
+            List<TNews> tNewsList = tNewsService.selectAllNews(pageNum, pageSize);
+            Integer total = tNewsService.selectNewsTotal();
             if (tNewsList != null) {
                 List<TNews> newsVoList = new ArrayList<>();
                 for (TNews news : tNewsList) {
@@ -38,15 +38,17 @@ public class TNewsController {
                     newsVo.setRead(news.getRead());
                     newsVoList.add(newsVo);
                 }
-                return new ResponseUtils(200, "查询成功", newsVoList,total);
+                return new ResponseUtils(200, "查询成功", newsVoList, total);
             } else {
-                return new ResponseUtils(400, "查询失败");
+                return new ResponseUtils(200, "暂无审核通过的新闻", null);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
+            return new ResponseUtils(500, "查询失败：" + e.getMessage());
         }
     }
+
+
 
     //ct
     @RequestMapping("/selectNews")
