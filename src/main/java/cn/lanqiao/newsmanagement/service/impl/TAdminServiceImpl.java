@@ -115,15 +115,6 @@ public class TAdminServiceImpl implements TAdminService {
         }
     }
 
-//    @Override
-//    public TAdmin queryByUsername(String username) {
-//        try {
-//            return tAdminMapper.queryByUsername(username);
-//        } catch (Exception e) {
-//            log.error("查询用户名失败", e);
-//            return null;
-//        }
-//    }
 
     @Override
     public boolean isUsernameExists(String username) {

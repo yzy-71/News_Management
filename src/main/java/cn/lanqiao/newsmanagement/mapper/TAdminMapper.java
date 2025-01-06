@@ -24,9 +24,7 @@ public interface TAdminMapper {
     @Select("select * from t_admin where username=#{username} and password = #{password} and is_delete=0")
     TAdmin login(TAdminQuery tAdminQuery);
 
-    /**
-     * 注册界面
-     */
+
     /**
      * 注册新用户
      */

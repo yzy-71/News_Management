@@ -29,7 +29,9 @@ public interface TAdminService {
      */
     int register(TAdminAdd tAdminAdd);
 
-    // 查询用户名是否存在
+    /**
+     * 查询用户名是否存在
+     */
     boolean isUsernameExists(String username);
 }
 

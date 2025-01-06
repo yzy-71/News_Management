@@ -66,26 +66,7 @@ public class TAdminController {
         }
     }
 
-//
-//    /**
-//     * 登录功能
-//     */
-//    @RequestMapping("/login")
-//    public ResponseUtils login(@RequestBody TAdminQuery tAdminQuery) {
-//        try {
-//            TAdmin userLogin = tAdminService.login(tAdminQuery);
-//            if (userLogin != null) {
-//                //登录成功
-//                return new ResponseUtils(200, "登录成功");
-//            }else {
-//                //登录失败
-//                return new ResponseUtils(500, "登录失败");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            throw new RuntimeException(e);
-//        }
-//    }
+
 
     /**
      * 登录功能
