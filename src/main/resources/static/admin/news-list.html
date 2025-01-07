@@ -2,95 +2,95 @@
 <title>新闻管理</title>
 <style>
     table {
-           width: 100%;
-           border-collapse: collapse;
-       }
-       th, td {
-           border: 1px solid #ddd;
-           padding: 8px;
-           text-align: left;
-       }
-       th {
-           background-color: #f2f2f2;
-       }
-       .content {
-           display: none;
-           margin-top: 10px;
-           border: 1px solid #ddd;
-           padding: 10px;
-       }
-       body {
-           font-family: Arial, sans-serif;
-           background-color: #f9f9f9;
-           margin: 20px;
-       }
-       h1 {
-           color: #333;
-       }
-       button {
-           background-color: #4CAF50; /* Green */
-           color: white;
-           border: none;
-           padding: 10px 15px;
-           text-align: center;
-           text-decoration: none;
-           display: inline-block;
-           font-size: 16px;
-           margin: 4px 2px;
-           cursor: pointer;
-           border-radius: 5px;
-           transition: background-color 0.3s;
-       }
-       button:hover {
-           background-color: #45a049; /* Darker green */
-       }
-       table {
-           margin-top: 20px;
-       }
-       #searchInput {
-           padding: 10px;
-           margin-right: 10px;
-           border: 2px solid #D9534F; /* 更改为红色边框 */
-           border-radius: 5px;
-           background-color: #f9f9f9; /* 浅灰色背景 */
-           width: 200px; /* 固定宽度 */
-           transition: border-color 0.3s;
-       }
-       #searchInput:focus {
-           border-color: #D9534F; /* 聚焦时的边框颜色更改为红色 */
-           outline: none; /* 去掉默认的轮廓 */
-       }
-       .pagination {
-           margin-top: 20px;
-           display: flex;
-           align-items: center;
-           justify-content: center; /* 居中对齐 */
-       }
-       .pagination button {
-           margin: 0 15px; /* 增加按钮之间的间距 */
-           background-color: #D9534F; /* 更改为红色背景 */
-           color: white; /* 白色文字 */
-           border: none; /* 去掉边框 */
-           border-radius: 5px;
-           padding: 10px 15px;
-           cursor: pointer; /* 鼠标指针 */
-           transition: background-color 0.3s;
-       }
-       .pagination button:hover {
-           background-color: #c9443e; /* 鼠标悬停时的颜色 */
-       }
-       .pagination input {
-           width: 60px; /* 固定宽度 */
-           padding: 8px;
-           margin-left: 5px;
-           border: 2px solid #D9534F; /* 绿色边框 */
-           border-radius: 5px;
-           text-align: center; /* 文本居中 */
-       }
-       .pagination input:focus {
-           border-color: #D9534F; /* 聚焦时的边框颜色 */
-           outline: none; /* 去掉默认的轮廓 */
-       }
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .content {
+        display: none;
+        margin-top: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 20px;
+    }
+    h1 {
+        color: #333;
+    }
+    button {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #45a049; /* Darker green */
+    }
+    table {
+        margin-top: 20px;
+    }
+    #searchInput {
+        padding: 10px;
+        margin-right: 10px;
+        border: 2px solid #D9534F; /* 更改为红色边框 */
+        border-radius: 5px;
+        background-color: #f9f9f9; /* 浅灰色背景 */
+        width: 200px; /* 固定宽度 */
+        transition: border-color 0.3s;
+    }
+    #searchInput:focus {
+        border-color: #D9534F; /* 聚焦时的边框颜色更改为红色 */
+        outline: none; /* 去掉默认的轮廓 */
+    }
+    .pagination {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* 居中对齐 */
+    }
+    .pagination button {
+        margin: 0 15px; /* 增加按钮之间的间距 */
+        background-color: #D9534F; /* 更改为红色背景 */
+        color: white; /* 白色文字 */
+        border: none; /* 去掉边框 */
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer; /* 鼠标指针 */
+        transition: background-color 0.3s;
+    }
+    .pagination button:hover {
+        background-color: #c9443e; /* 鼠标悬停时的颜色 */
+    }
+    .pagination input {
+        width: 60px; /* 固定宽度 */
+        padding: 8px;
+        margin-left: 5px;
+        border: 2px solid #D9534F; /* 绿色边框 */
+        border-radius: 5px;
+        text-align: center; /* 文本居中 */
+    }
+    .pagination input:focus {
+        border-color: #D9534F; /* 聚焦时的边框颜色 */
+        outline: none; /* 去掉默认的轮廓 */
+    }
     .pagination {
         margin-top: 20px;
         display: flex;
@@ -130,7 +130,7 @@
     }
 </style>
 <script>
-   
+
 </script>
 <div id="newsListContainer">
     <h1>所有新闻</h1>
@@ -167,257 +167,421 @@
         <button id="jumpBtn">跳转</button>
     </div>
 
-<script type="text/javascript">
+    <script type="text/javascript">
+        (function() {
+            console.log('定义 NewsListManager');
 
-    (function() {
-        console.log('定义 NewsListManager');
+            // 确保在全局作用域定义 NewsListManager
+            window.NewsListManager = {
+                currentPage: 1,
+                pageSize: 5,
+                totalPages: 1,
+                initialized: false,
 
-        // 确保在全局作用域定义 NewsListManager
-        window.NewsListManager = {
-            currentPage: 1,
-            pageSize: 5,
-            totalPages: 1,
-            initialized: false,
+                init: function() {
+                    if (this.initialized) return;
+                    console.log('NewsListManager 初始化开始');
+                    this.initialized = true;
+                    this.bindEvents();
+                    this.fetchNewsList();
+                },
 
-            init: function() {
-                if (this.initialized) return;
-                console.log('NewsListManager 初始化开始');
-                this.initialized = true;
-                this.bindEvents();
-                this.fetchNewsList();
-            },
+                bindEvents: function() {
+                    console.log('绑定事件');
 
-            bindEvents: function() {
-                console.log('绑定事件');
+                    // 使用箭头函数保持 this 的指向
+                    document.getElementById('searchBtn')?.addEventListener('click', () => this.searchNews());
+                    document.getElementById('prevBtn')?.addEventListener('click', () => this.prevPage());
+                    document.getElementById('nextBtn')?.addEventListener('click', () => this.nextPage());
+                    document.getElementById('jumpBtn')?.addEventListener('click', () => this.jumpToPage());
+                },
 
-                // 使用箭头函数保持 this 的指向
-                document.getElementById('searchBtn')?.addEventListener('click', () => this.searchNews());
-                document.getElementById('prevBtn')?.addEventListener('click', () => this.prevPage());
-                document.getElementById('nextBtn')?.addEventListener('click', () => this.nextPage());
-                document.getElementById('jumpBtn')?.addEventListener('click', () => this.jumpToPage());
-            },
+                renderNewsList: function (newsList) {
+                    console.log('渲染新闻列表, 数据:', newsList);
+                    const tbody = document.querySelector('tbody');
 
-            fetchNewsList: function() {
-                console.log('开始获取新闻列表');
-                const searchInput = document.getElementById('searchInput');
-
-                const params = {
-                    pageNum: this.currentPage,
-                    pageSize: this.pageSize,
-                    keyword: searchInput ? searchInput.value.trim() : ''
-                };
-
-                console.log('发送请求参数:', params);
-
-                axios({
-                    url: 'http://localhost:8080/news/list',
-                    method: 'post',
-                    data: params,
-                    headers: {
-                        'Content-Type': 'application/json'
+                    if (!newsList || newsList.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">暂无数据</td></tr>';
+                        return;
                     }
-                })
-                    .then(response => {
-                        console.log('获取新闻列表成功，原始响应:', response);
-                        if (response.data.code === 200) {
-                            const pageInfo = response.data.data;
-                            console.log('分页数据:', pageInfo);
 
-                            if (pageInfo && Array.isArray(pageInfo.list)) {
-                                // 计算总页数
-                                const total = pageInfo.list.length;
-                                this.totalPages = Math.ceil(total / this.pageSize);
+                    tbody.innerHTML = newsList.map(news => {
+                        console.log('处理新闻项:', news);
+                        const newsId = news.id || '';  // 处理 null 的情况
+                        return `
+            <tr>
+                <td><h3>${news.title || '无标题'}</h3></td>
+                <td>${news.username || '未知作者'}</td>
+                <td>${news.submitDate || news.date || '未知日期'}</td>
+                <td>
+                    ${newsId ? `
+                        <button onclick="NewsListManager.deleteNews('${newsId}')">删除新闻</button>
+                        <button onclick="NewsListManager.viewDetails('${newsId}')">查看</button>
+                    ` : '操作不可用'}
+                </td>
+            </tr>
+        `;
+                    }).join('');
+                },
 
-                                // 计算当前页的数据范围
-                                const startIndex = (this.currentPage - 1) * this.pageSize;
-                                const endIndex = Math.min(startIndex + this.pageSize, total);
+                updatePagination: function() {
+                    console.log('更新分页信息');
+                    console.log(`当前页: ${this.currentPage}, 总页数: ${this.totalPages}`);
 
-                                // 只截取当前页需要显示的数据
-                                const currentPageData = pageInfo.list.slice(startIndex, endIndex);
+                    // 更新当前页和总页数显示
+                    document.getElementById('currentPage').textContent = this.currentPage;
+                    document.getElementById('totalPages').textContent = this.totalPages;
 
-                                console.log(`总记录数: ${total}, 当前页: ${this.currentPage}, 总页数: ${this.totalPages}`);
-                                console.log(`显示数据范围: ${startIndex} - ${endIndex}`);
+                    // 更新跳转输入框的限制
+                    const jumpPageInput = document.getElementById('jumpPageInput');
+                    jumpPageInput.max = this.totalPages;
+                    jumpPageInput.placeholder = `跳转到页数(1-${this.totalPages})`;
 
-                                this.renderNewsList(currentPageData);
-                                this.updatePagination();
+                    // 更新按钮状态
+                    document.getElementById('prevBtn').disabled = this.currentPage <= 1;
+                    document.getElementById('nextBtn').disabled = this.currentPage >= this.totalPages;
+                },
+
+                // 添加导航方法
+                prevPage: function() {
+                    console.log('尝试跳转到上一页');
+                    if (this.currentPage > 1) {
+                        this.currentPage--;
+                        this.fetchNewsList();
+                    }
+                },
+
+                nextPage: function() {
+                    console.log('尝试跳转到下一页');
+                    if (this.currentPage < this.totalPages) {
+                        this.currentPage++;
+                        this.fetchNewsList();
+                    }
+                },
+
+                jumpToPage: function() {
+                    console.log('尝试跳转到指定页');
+                    const jumpPageInput = document.getElementById('jumpPageInput');
+                    const pageNum = parseInt(jumpPageInput.value);
+
+                    if (!pageNum || pageNum < 1 || pageNum > this.totalPages) {
+                        alert(`请输入有效的页码！(1-${this.totalPages})`);
+                        jumpPageInput.value = '';
+                        return;
+                    }
+
+                    this.currentPage = pageNum;
+                    this.fetchNewsList();
+                    jumpPageInput.value = '';
+                },
+
+                searchNews: function() {
+                    console.log('执行搜索');
+                    this.currentPage = 1; // 搜索时重置到第一页
+                    this.fetchNewsList();
+                },
+
+                fetchNewsList: function () {
+                    console.log('开始获取新闻列表');
+                    const searchInput = document.getElementById('searchInput');
+                    const keyword = searchInput ? searchInput.value.trim() : '';
+
+                    const params = {
+                        pageNum: 1,
+                        pageSize: 1000,
+                        title: keyword
+                    };
+
+                    console.log('发送请求参数:', params);
+
+                    // 根据是否有关键词选择接口
+                    const url = keyword
+                        ? 'http://localhost:8080/news/search'  // 搜索接口
+                        : 'http://localhost:8080/news/list';   // 普通列表接口
+
+                    axios({
+                        url: url,
+                        method: 'post',
+                        data: params,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(response => {
+                            console.log('获取列表成功，响应:', response);
+                            if (response.data.code === 200) {
+                                const pageInfo = response.data.data;
+
+                                if (pageInfo && Array.isArray(pageInfo.list)) {
+                                    let validNewsList = pageInfo.list.filter(news => news && news.title);
+
+                                    // 如果是搜索请求，进行关键词过滤
+                                    if (keyword) {
+                                        validNewsList = validNewsList.filter(news =>
+                                            news.title.toLowerCase().includes(keyword.toLowerCase())
+                                        );
+                                    }
+
+                                    // 在前端进行分页处理
+                                    const total = validNewsList.length;
+                                    this.totalPages = Math.ceil(total / this.pageSize);
+
+                                    // 计算当前页的数据范围
+                                    const startIndex = (this.currentPage - 1) * this.pageSize;
+                                    const endIndex = Math.min(startIndex + this.pageSize, total);
+
+                                    // 只截取当前页需要显示的数据
+                                    const currentPageData = validNewsList.slice(startIndex, endIndex);
+
+                                    console.log(`搜索关键词: ${keyword}, 匹配记录数: ${total}`);
+                                    console.log(`总记录数: ${total}, 当前页: ${this.currentPage}, 总页数: ${this.totalPages}`);
+                                    console.log(`显示数据范围: ${startIndex} - ${endIndex}`);
+
+                                    this.renderNewsList(currentPageData);
+                                    this.updatePagination();
+                                } else {
+                                    console.error('返回的数据格式不正确:', pageInfo);
+                                    this.handleEmptyData();
+                                }
                             } else {
-                                console.error('返回的数据格式不正确:', pageInfo);
+                                console.error('请求失败:', response.data.msg);
                                 this.handleEmptyData();
                             }
-                        } else {
-                            console.error('请求失败:', response.data.msg);
+                        })
+                        .catch(error => {
+                            console.error('请求发生错误:', error);
                             this.handleEmptyData();
+                        });
+                },
+
+                deleteNews: function(newsId) {
+                    console.log('删除新闻:', newsId);
+                    if (!newsId) {
+                        alert('无效的新闻ID');
+                        return;
+                    }
+
+                    if (!confirm('确定要删除这条新闻吗？')) return;
+
+                    // 修改为使用data而不是params
+                    axios({
+                        url: `http://localhost:8080/news/delete`,
+                        method: 'delete',
+                        data: { id: newsId },  // 改用data发送数据
+                        headers: {
+                            'Content-Type': 'application/json'
                         }
                     })
-                    .catch(error => {
-                        console.error('获取新闻列表失败:', error);
-                        this.handleEmptyData();
-                    });
-            },
+                        .then(response => {
+                            console.log('删除新闻响应:', response);
+                            if (response.data.code === 200) {
+                                alert('删除成功');
+                                this.fetchNewsList(); // 重新加载列表
+                            } else {
+                                console.error('删除失败:', response.data);
+                                alert(`删除失败：${response.data.msg || '未知错误'}`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('删除新闻失败:', error);
+                            const errorMessage = error.response?.data?.msg
+                                || error.response?.statusText
+                                || error.message
+                                || '未知错误';
+                            alert(`删除失败：${errorMessage}`);
+                        });
+                },
 
-            renderNewsList: function(newsList) {
-                console.log('渲染新闻列表, 数据条数:', newsList.length);
-                const tbody = document.querySelector('tbody');
+                viewDetails: function(newsId) {
+                    console.log('查看新闻详情，newsId:', newsId);
 
-                if (!newsList || newsList.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">暂无数据</td></tr>';
-                    return;
-                }
+                    // 先从当前列表获取基本信息作为备用
+                    const newsInfo = this.getNewsFromCurrentList(newsId);
 
-                tbody.innerHTML = newsList.map(news => `
-        <tr>
-            <td><h3>${news.title || '无标题'}</h3></td>
-            <td>${news.username || '未知作者'}</td>
-            <td>${news.date || '未知日期'}</td>
-            <td>
-                <button onclick="NewsListManager.deleteNews('${news.id}')">删除新闻</button>
-                <button onclick="NewsListManager.viewDetails('${news.id}')">查看</button>
-            </td>
-        </tr>
-    `).join('');
-            },
-
-            updatePagination: function() {
-                console.log('更新分页信息');
-                console.log(`当前页: ${this.currentPage}, 总页数: ${this.totalPages}`);
-
-                // 更新当前页和总页数显示
-                document.getElementById('currentPage').textContent = this.currentPage;
-                document.getElementById('totalPages').textContent = this.totalPages;
-
-                // 更新跳转输入框的限制
-                const jumpPageInput = document.getElementById('jumpPageInput');
-                jumpPageInput.max = this.totalPages;
-                jumpPageInput.placeholder = `跳转到页数(1-${this.totalPages})`;
-
-                // 更新按钮状态
-                document.getElementById('prevBtn').disabled = this.currentPage <= 1;
-                document.getElementById('nextBtn').disabled = this.currentPage >= this.totalPages;
-            },
-
-            // 添加导航方法
-            prevPage: function() {
-                console.log('尝试跳转到上一页');
-                if (this.currentPage > 1) {
-                    this.currentPage--;
-                    this.fetchNewsList();
-                }
-            },
-
-            nextPage: function() {
-                console.log('尝试跳转到下一页');
-                if (this.currentPage < this.totalPages) {
-                    this.currentPage++;
-                    this.fetchNewsList();
-                }
-            },
-
-            jumpToPage: function() {
-                console.log('尝试跳转到指定页');
-                const jumpPageInput = document.getElementById('jumpPageInput');
-                const pageNum = parseInt(jumpPageInput.value);
-
-                if (!pageNum || pageNum < 1 || pageNum > this.totalPages) {
-                    alert(`请输入有效的页码！(1-${this.totalPages})`);
-                    jumpPageInput.value = '';
-                    return;
-                }
-
-                this.currentPage = pageNum;
-                this.fetchNewsList();
-                jumpPageInput.value = '';
-            },
-
-            searchNews: function() {
-                console.log('执行搜索');
-                this.currentPage = 1; // 搜索时重置到第一页
-                this.fetchNewsList();
-            },
-
-            deleteNews: function(newsId) {
-                console.log('删除新闻:', newsId);
-                if (!confirm('确定要删除这条新闻吗？')) return;
-
-                axios({
-                    url: `http://localhost:8080/news/delete`,
-                    method: 'delete',
-                    params: { id: newsId }
-                })
-                    .then(response => {
-                        console.log('删除新闻响应:', response);
-                        if (response.data.code === 200) {
-                            alert('删除成功');
-                            this.fetchNewsList(); // 重新加载列表
-                        } else {
-                            alert('删除失败：' + response.data.msg);
+                    axios({
+                        url: 'http://localhost:8080/news/select',
+                        method: 'post',
+                        data: {
+                            id: parseInt(newsId)
+                        },
+                        headers: {
+                            'Content-Type': 'application/json'
                         }
                     })
-                    .catch(error => {
-                        console.error('删除新闻失败:', error);
-                        alert('删除失败：' + error.message);
-                    });
-            },
+                        .then(response => {
+                            console.log('获取详情完整响应:', response);
 
-            viewDetails: function(newsId) {
-                console.log('查看新闻详情:', newsId);
-                axios({
-                    url: `http://localhost:8080/news/select`,
-                    method: 'get',
-                    params: { id: newsId }
-                })
-                    .then(response => {
-                        console.log('获取新闻详情响应:', response);
-                        if (response.data.code === 200) {
-                            const news = response.data.data;
-                            this.showNewsModal(news);
-                        } else {
-                            alert('获取新闻详情失败：' + response.data.msg);
+                            if (response.data.code === 200) {
+                                const newsData = response.data.data;
+                                console.log('新闻详情数据:', newsData);
+
+                                if (newsData) {
+                                    // 使用服务器返回的数据
+                                    this.showNewsModal({
+                                        title: newsData.title || newsInfo.title,
+                                        username: newsData.username || newsInfo.username,
+                                        submitDate: newsData.date || newsInfo.submitDate,
+                                        content: newsData.content || '暂无详细内容'
+                                    });
+                                } else {
+                                    // 使用列表中的基本信息
+                                    this.showNewsModal({
+                                        ...newsInfo,
+                                        content: '暂无详细内容'
+                                    });
+                                }
+                            } else {
+                                // 发生错误时使用列表中的基本信息
+                                this.showNewsModal({
+                                    ...newsInfo,
+                                    content: '无法获取详细内容：' + response.data.msg
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('获取详情失败:', error);
+                            // 发生错误时使用列表中的基本信息
+                            this.showNewsModal({
+                                ...newsInfo,
+                                content: '获取详细内容失败：' + error.message
+                            });
+                        });
+                },
+
+// 从当前列表获取新闻基本信息的辅助方法
+                getNewsFromCurrentList: function(newsId) {
+                    const tbody = document.querySelector('tbody');
+                    const rows = tbody.getElementsByTagName('tr');
+
+                    for (let row of rows) {
+                        const cells = row.getElementsByTagName('td');
+                        if (cells.length >= 4) {
+                            return {
+                                title: cells[0].querySelector('h3').textContent.trim(),
+                                username: cells[1].textContent.trim(),
+                                submitDate: cells[2].textContent.trim(),
+                                content: '正在加载内容...'
+                            };
                         }
-                    })
-                    .catch(error => {
-                        console.error('获取新闻详情失败:', error);
-                        alert('获取详情失败：' + error.message);
+                    }
+                    return {
+                        title: '未知标题',
+                        username: '未知作者',
+                        submitDate: '未知日期',
+                        content: '无法加载内容'
+                    };
+                },
+
+// 添加新方法：从当前列表中查找新闻
+                findNewsInCurrentList: function(newsId) {
+                    const tbody = document.querySelector('tbody');
+                    const rows = tbody.getElementsByTagName('tr');
+
+                    for (let row of rows) {
+                        const cells = row.getElementsByTagName('td');
+                        if (cells.length >= 4) {
+                            // 从当前行提取新闻信息
+                            return {
+                                title: cells[0].querySelector('h3').textContent,
+                                username: cells[1].textContent,
+                                submitDate: cells[2].textContent,
+                                content: '详细内容暂不可用' // 因为列表中没有内容字段
+                            };
+                        }
+                    }
+                    return null;
+                },
+
+                showNewsModal: function(news) {
+                    console.log('显示新闻详情模态框');
+                    // 创建模态框
+                    const modal = document.createElement('div');
+                    modal.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        z-index: 1000;
+        width: 60%;
+        max-height: 80vh;
+        overflow-y: auto;
+    `;
+                    // 创建遮罩层
+                    const overlay = document.createElement('div');
+                    overlay.className = 'modal-overlay';
+                    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    `;
+
+                    // 修改模态框内容构建部分
+                    modal.innerHTML = `
+        <div style="position: relative;">
+            <h2 style="margin-top: 0; color: #333; font-size: 24px;">${news.title || '无标题'}</h2>
+            <div style="position: absolute; top: 0; right: 0;">
+                <button id="closeModalBtn"
+                        style="background: #D9534F; color: white; border: none;
+                               border-radius: 50%; width: 30px; height: 30px;
+                               cursor: pointer; font-size: 16px;">×</button>
+            </div>
+            <div style="margin: 20px 0; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+                <span style="margin-right: 20px;"><strong>作者：</strong>${news.username || '未知'}</span>
+                <span><strong>提交日期：</strong>${news.submitDate || news.date || '未知'}</span>
+            </div>
+            <div style="line-height: 1.6;">
+                <strong style="display: block; margin-bottom: 10px;">内容：</strong>
+                <div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
+                    ${news.content || '暂无内容'}
+                </div>
+            </div>
+        </div>
+    `;
+                    /// 修复关闭按钮事件监听
+                    const closeBtn = modal.querySelector('#closeModalBtn');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', () => {
+                            overlay.remove();
+                            modal.remove();  // 添加这行
+                        });
+                    }
+
+                    // 点击遮罩层关闭模态框
+                    overlay.addEventListener('click', (e) => {
+                        if (e.target === overlay) {
+                            overlay.remove();
+                            modal.remove();  // 添加这行
+                        }
                     });
-            },
 
-            showNewsModal: function(news) {
-                console.log('显示新闻详情模态框');
-                const modal = document.createElement('div');
-                modal.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: white;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.5);
-                z-index: 1000;
-                max-width: 80%;
-                max-height: 80vh;
-                overflow-y: auto;
-            `;
-
-                modal.innerHTML = `
-                <h2>${news.title}</h2>
-                <p><strong>作者：</strong>${news.author}</p>
-                <p><strong>提交日期：</strong>${news.submitDate}</p>
-                <p><strong>内容：</strong></p>
-                <div>${news.content}</div>
-                <button onclick="this.parentElement.remove()" style="margin-top: 20px;">关闭</button>
-            `;
-
-                document.body.appendChild(modal);
+                    // ESC键关闭模态框
+                    const escHandler = (e) => {
+                        if (e.key === 'Escape') {
+                            overlay.remove();
+                            modal.remove();  // 添加这行
+                            document.removeEventListener('keydown', escHandler);
+                        }
+                    };
+                    document.addEventListener('keydown', escHandler);
+                    document.body.appendChild(modal);
+                }
             }
-        };
 
-        // 自动初始化
-        console.log('等待 DOM 加载完成');
-        setTimeout(() => {
-            if (!window.NewsListManager.initialized) {
-                console.log('执行自动初始化');
-                window.NewsListManager.init();
-            }
-        }, 100);
-    })();
-</script>
+            // 自动初始化
+            console.log('等待 DOM 加载完成');
+            setTimeout(() => {
+                if (!window.NewsListManager.initialized) {
+                    console.log('执行自动初始化');
+                    window.NewsListManager.init();
+                }
+            }, 100);
+        })();
+    </script>

@@ -15,12 +15,12 @@ public class NewsManagementServiceImpl implements NewsManagementService {
     private NewsManagementMapper newsManagementMapper;
 
     @Override
-    public PageHelper<TNews> pageList(String title, String username, String date, int pageNum, int pageSize) {
+    public PageHelper<TNews> pageList(String title, String username, String date, int pageNum, int pageSize,int id) {
         //一共有多少条数据
         int totalNum = newsManagementMapper.totalNewsNum(new TNews());
         //数据库中初始索引
         int offset=(pageNum -1)*pageSize;
-        List<TNews> tNews = newsManagementMapper.pageList(title, username, date, pageNum, pageSize, offset);
+        List<TNews> tNews = newsManagementMapper.pageList(title, username, date, pageNum, pageSize, id,offset);
         //创建分页对象
         PageHelper<TNews> pageHelper = new PageHelper<>();
         //当前页码
@@ -32,13 +32,14 @@ public class NewsManagementServiceImpl implements NewsManagementService {
         pageHelper.setList(tNews);
         return pageHelper;
     }
+
     @Override
-    public PageHelper<TNews> fuzzyQueryNews(String title, String username, String date, int pageNum, int pageSize) {
+    public PageHelper<TNews> fuzzyQueryNews(String title, String username, String date, int pageNum, int pageSize,int id) {
         //一共有多少条数据
         int fuzzyTotalNewsNum = newsManagementMapper.fuzzyTotalNewsNum(new TNews());
         //数据库中初始索引
         int offset=(pageNum -1)*pageSize;
-        List<TNews> tNews = newsManagementMapper.fuzzyQueryNews(title, username, date, pageNum, pageSize, offset);
+        List<TNews> tNews = newsManagementMapper.fuzzyQueryNews(title, username, date, pageNum, pageSize, id,offset);
         //创建分页对象
         PageHelper<TNews> pageHelper = new PageHelper<>();
         //当前页码
@@ -49,5 +50,25 @@ public class NewsManagementServiceImpl implements NewsManagementService {
         pageHelper.setPages((int)Math.ceil((double) fuzzyTotalNewsNum /pageSize));
         pageHelper.setList(tNews);
         return pageHelper;
+    }
+
+    @Override
+    public int deleteNews(int id) {
+        int result = newsManagementMapper.deleteNews(id);
+        if (result>0){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+
+    @Override
+    public List<TNews> selectNews(int id) {
+        List<TNews> tNews = newsManagementMapper.selectNews(id);
+        if (tNews!=null){
+            return tNews;
+        }else {
+            return null;
+        }
     }
 }

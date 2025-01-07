@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>页面布局</title>
+    <!-- 将 axios 移到 head 中 -->
+    <script src="../js/axios.min.js"></script>
     <style>
         body {
             display: flex;
@@ -63,33 +65,58 @@
         }
     </style>
     <script>
+        // 创建全局变量来存储当前加载的模块管理器
+        window.currentManager = null;
+
         function loadModule(module) {
+            console.log('开始加载模块:', module);
             const rightPanel = document.querySelector('.right-panel');
             fetch(module)
                 .then(response => response.text())
                 .then(data => {
                     rightPanel.innerHTML = data;
+                    console.log('模块加载完成');
+
+                    // 执行模块内的脚本
+                    const scripts = rightPanel.getElementsByTagName('script');
+                    Array.from(scripts).forEach(script => {
+                        const newScript = document.createElement('script');
+                        if (script.src) {
+                            newScript.src = script.src;
+                        } else {
+                            newScript.textContent = script.textContent;
+                        }
+                        document.body.appendChild(newScript);
+                        // 可选：移除旧脚本
+                        script.parentNode.removeChild(script);
+                    });
+
+                    // 等待脚本执行完成
+                    setTimeout(() => {
+                        if (module === 'news-list.html' && window.NewsListManager) {
+                            console.log('初始化 NewsListManager');
+                            window.NewsListManager.init();
+                        }
+                    }, 100);
                 })
                 .catch(error => {
                     rightPanel.innerHTML = '<p>加载模块失败</p>';
                     console.error('Error loading module:', error);
                 });
         }
-
-        // 这里可以添加全局的功能，例如用户登录状态检查等
     </script>
 </head>
 <body onload="loadModule('news-list.html')">
-    <div class="left-panel">
-    
-        <div class="username">用户名</div>
-        <div class="menu-item" onclick="loadModule('news-list.html')">新闻管理</div>
-        <div class="menu-item" onclick="loadModule('news-audit.html')">新闻审核</div>
+<div class="left-panel">
 
-        <div class="menu-item" onclick="loadModule('user-list.html')">用户管理</div>
-    </div>
-    <div class="right-panel">
-        <!-- 右侧模块内容 -->
-    </div>
+    <div class="username">用户名</div>
+    <div class="menu-item" onclick="loadModule('news-list.html')">新闻管理</div>
+    <div class="menu-item" onclick="loadModule('news-audit.html')">新闻审核</div>
+
+    <div class="menu-item" onclick="loadModule('user-list.html')">用户管理</div>
+</div>
+<div class="right-panel">
+    <!-- 右侧模块内容 -->
+</div>
 </body>
 </html>
