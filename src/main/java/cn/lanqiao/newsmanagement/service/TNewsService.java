@@ -1,5 +1,6 @@
 package cn.lanqiao.newsmanagement.service;
 
+import cn.hutool.db.PageResult;
 import cn.lanqiao.newsmanagement.model.pojo.TNews;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,8 +11,12 @@ public interface TNewsService {
 //    List<TNews> selectAllNews();
     List<TNews> selectAllNews(Integer pageNum,Integer pageSize); //ct
     List<TNews> selectAllNewsList(Integer pageNum, Integer pageSize);
+
     //按分类查询新闻
-    List<TNews> selectNewsBySort(String sort);
+//    List<TNews> selectNewsBySort(String sort);
+    List<TNews> selectNewsBySort(String sort, Integer pageNum, Integer pageSize);
+    Integer selectNewsBySortTotal(String sort);
+
     //ct
     //通过标题查询新闻
     List<TNews> selectNewsByTitle(String title);
@@ -21,6 +26,4 @@ public interface TNewsService {
   Integer updateAuditno(String id);
 
   Object updateRemarks(String id, String remarks);
-  //ct
-
 }

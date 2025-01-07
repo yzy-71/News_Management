@@ -1,6 +1,7 @@
 package cn.lanqiao.newsmanagement.service.impl;
 
 import cn.hutool.core.util.PageUtil;
+import cn.hutool.db.PageResult;
 import cn.lanqiao.newsmanagement.mapper.TNewsMapper;
 import cn.lanqiao.newsmanagement.model.pojo.TNews;
 import cn.lanqiao.newsmanagement.service.TNewsService;
@@ -61,14 +62,23 @@ public class TNewsServiceImpl implements TNewsService {
 
 
     //按分类查询新闻
+//    @Override
+//    public List<TNews> selectNewsBySort(String sort) {
+//        List<TNews> tNews = tNewsMapper.selectNewsBySort(sort);
+//        if (tNews != null) {
+//            return tNews;
+//        } else {
+//            return null;
+//        }
+//    }
+    public List<TNews> selectNewsBySort(String sort, Integer pageNum, Integer pageSize) {
+        Integer offset = (pageNum - 1) * pageSize;
+   return tNewsMapper.selectNewsBySort(sort, offset, pageSize);
+    }
+
     @Override
-    public List<TNews> selectNewsBySort(String sort) {
-        List<TNews> tNews = tNewsMapper.selectNewsBySort(sort);
-        if (tNews != null) {
-            return tNews;
-        } else {
-            return null;
-        }
+    public Integer selectNewsBySortTotal(String sort) {
+        return tNewsMapper.selectNewsBySortTotal(sort);
     }
 
 
@@ -82,4 +92,5 @@ public class TNewsServiceImpl implements TNewsService {
             return null;
         }
     }
+
 }

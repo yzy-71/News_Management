@@ -61,28 +61,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 跳转
-    document.body.addEventListener('click', function(event) {
-        if (event.target.id === 'go-to-page') {
-            let pageInfo = document.getElementById('page-info');
-            let pageInput = document.getElementById('page-input');
-            let pageInfoText = pageInfo.innerText;
-            let pageInputText = parseInt(pageInput.value);
-            // 使用正则表达式匹配页码
-            const regex = /第 (\d+) 页 \/ 共 (\d+) 页/;
-            const match = pageInfoText.match(regex);
+    // 跳转按钮事件
+    document.getElementById('go-to-page').addEventListener('click', function() {
+        let pageInfo = document.getElementById('page-info');
+        let pageInput = document.getElementById('page-input');
+        let pageInfoText = pageInfo.innerText;
+        let pageInputText = parseInt(pageInput.value);
+        // 使用正则表达式匹配页码
+        const regex = /第 (\d+) 页 \/ 共 (\d+) 页/;
+        const match = pageInfoText.match(regex);
 
-            if (match) {
-                // 如果匹配成功，提取总页数
-                const totalPages = parseInt(match[2], 10);
+        if (match) {
+            // 如果匹配成功，提取总页数
+            const totalPages = parseInt(match[2], 10);
 
-                // 验证输入的页码并直接跳转
-                if (pageInputText > 0 && pageInputText <= totalPages) {
-                    loadNews(pageInputText);
-                }
-                // 清空输入框
-                pageInput.value = '';
+            // 验证输入的页码并直接跳转
+            if (pageInputText > 0 && pageInputText <= totalPages) {
+                loadNews(pageInputText);
             }
+            // 清空输入框
+            pageInput.value = '';
         }
     });
 });
@@ -132,15 +130,26 @@ function loadNews(pageNum) {
             } else {
                 document.getElementById('news-list').innerHTML = '<div class="news-item">暂无新闻</div>';
             }
+        } else {
+            console.error('加载新闻失败：', result.data.msg);
+            document.getElementById('news-list').innerHTML =
+                `<div class="news-item" style="text-align: center;">
+                    <h3>加载失败：${result.data.msg}</h3>
+                </div>`;
         }
     }).catch(error => {
         console.error('请求失败：', error);
+        document.getElementById('news-list').innerHTML =
+            `<div class="news-item" style="text-align: center;">
+                <h3>请求失败，请稍后重试</h3>
+            </div>`;
     });
 }
 
 // 按标题搜索新闻
 function selectNews(pageNum) {
-    let title = document.getElementById('news-search').value;
+    let title = document.getElementById('news-search').value
+    // console.log('title-->',title)
     axios({
         url: 'http://localhost:8080/news/selectNews',
         method: 'get',
@@ -216,19 +225,9 @@ function loadNewsBySort(sort) {
                         <h3>${sortType}暂无新闻</h3>
                     </div>`;
             }
-        } else {
-            console.error('加载新闻失败：', result.data.msg);
-            document.getElementById('news-list').innerHTML =
-                `<div class="news-item" style="text-align: center;">
-                    <h3>加载失败：${result.data.msg}</h3>
-                </div>`;
         }
     }).catch(error => {
         console.error('请求失败：', error);
-        document.getElementById('news-list').innerHTML =
-            `<div class="news-item" style="text-align: center;">
-                <h3>请求失败，请稍后重试</h3>
-            </div>`;
     });
 }
 
@@ -240,4 +239,4 @@ document.body.addEventListener('click', function(event) {
     }
 });
 
-// 其他函数保持不变...
+

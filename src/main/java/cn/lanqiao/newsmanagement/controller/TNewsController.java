@@ -1,4 +1,5 @@
 package cn.lanqiao.newsmanagement.controller;
+import cn.hutool.db.PageResult;
 import cn.lanqiao.newsmanagement.model.pojo.TNews;
 import cn.lanqiao.newsmanagement.service.TNewsService;
 import cn.lanqiao.newsmanagement.utils.ResponseUtils;
@@ -121,11 +122,49 @@ public class TNewsController {
     /**
      * 04-按分类查询新闻
      */
+//    @RequestMapping("/selectNewsBySort")
+//    public ResponseUtils selectNewsBySort (String sort){
+//        try {
+//            List<TNews> tNewsList = tNewsService.selectNewsBySort(sort);
+//            if (tNewsList != null) {
+//                List<TNews> newsVoList = new ArrayList<>();
+//                for (TNews news : tNewsList) {
+//                    TNews newsVo = new TNews();
+//                    newsVo.setId(news.getId());
+//                    newsVo.setTitle(news.getTitle());
+//                    newsVo.setUsername(news.getUsername());
+//                    newsVo.setSort(news.getSort());
+//                    newsVo.setContent(news.getContent());
+//                    newsVo.setDate(news.getDate());
+//                    newsVo.setRead(news.getRead());
+//                    newsVoList.add(newsVo);
+//                }
+//                return new ResponseUtils(200, "查询成功", newsVoList);
+//            } else {
+//                return new ResponseUtils(200, "该分类暂无数据", null);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return new ResponseUtils(500, "查询失败：" + e.getMessage());
+//        }
+//    }
+    /**
+     * 04-按分类查询新闻
+     */
     @RequestMapping("/selectNewsBySort")
-    public ResponseUtils selectNewsBySort (String sort){
+    public ResponseUtils selectNewsBySort(
+            @RequestParam String sort,
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "3") Integer pageSize) {
         try {
-            List<TNews> tNewsList = tNewsService.selectNewsBySort(sort);
-            if (tNewsList != null) {
+            // 获取分类新闻列表
+            List<TNews> tNewsList = tNewsService.selectNewsBySort(sort, pageNum, pageSize);
+            // 获取该分类的总新闻数
+            Integer total = tNewsService.selectNewsBySortTotal(sort);
+            // 计算总页数
+            Integer totalPages = (total + pageSize - 1) / pageSize;
+
+            if (tNewsList != null && !tNewsList.isEmpty()) {
                 List<TNews> newsVoList = new ArrayList<>();
                 for (TNews news : tNewsList) {
                     TNews newsVo = new TNews();
@@ -138,15 +177,15 @@ public class TNewsController {
                     newsVo.setRead(news.getRead());
                     newsVoList.add(newsVo);
                 }
-                return new ResponseUtils(200, "查询成功", newsVoList);
+                return new ResponseUtils<>(200, "查询成功", newsVoList, totalPages);
             } else {
-                return new ResponseUtils(200, "该分类暂无数据", null);
+                return new ResponseUtils<>(200, "该分类暂无数据", null);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseUtils(500, "查询失败：" + e.getMessage());
+            return new ResponseUtils<>(500, "查询失败：" + e.getMessage());
         }
     }
+
     @RequestMapping("/updateAudit")
     public Integer updateA(String id){
         return tNewsService.updateAudit(id);
