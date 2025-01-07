@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TNews {
-    private String id;
+    private int id;
     private String username;
     private String sort;
     private String content;
@@ -18,4 +18,5 @@ public class TNews {
     private String date;
     private long isDelete;
     private long read;
+    private int userId;
 }

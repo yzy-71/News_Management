@@ -1,148 +1,598 @@
 <meta charset="UTF-8">
-    <style>
-       table {
-           width: 100%;
-           border-collapse: collapse;
-       }
-       th, td {
-           border: 1px solid #ddd;
-           padding: 8px;
-           text-align: left;
-       }
-       th {
-           background-color: #f2f2f2;
-       }
-       .content {
-           display: none;
-           margin-top: 10px;
-           border: 1px solid #ddd;
-           padding: 10px;
-       }
-       body {
-           font-family: Arial, sans-serif;
-           background-color: #f9f9f9;
-           margin: 20px;
-       }
-       h1 {
-           color: #333;
-       }
-       button {
-           background-color: #4CAF50; /* Green */
-           color: white;
-           border: none;
-           padding: 10px 15px;
-           text-align: center;
-           text-decoration: none;
-           display: inline-block;
-           font-size: 16px;
-           margin: 4px 2px;
-           cursor: pointer;
-           border-radius: 5px;
-           transition: background-color 0.3s;
-       }
-       button:hover {
-           background-color: #45a049; /* Darker green */
-       }
-       table {
-           margin-top: 20px;
-       }
-       /* 新添加的样式 */
-       #searchInput {
-           padding: 10px;
-           margin-right: 10px;
-           border: 2px solid #D9534F; /* 更改为红色边框 */
-           border-radius: 5px;
-           background-color: #f9f9f9; /* 浅灰色背景 */
-           width: 200px; /* 固定宽度 */
-           transition: border-color 0.3s;
-       }
-       #searchInput:focus {
-           border-color: #D9534F; /* 聚焦时的边框颜色更改为红色 */
-           outline: none; /* 去掉默认的轮廓 */
-       }
-       .pagination {
-           margin-top: 20px;
-           display: flex;
-           align-items: center;
-           justify-content: center; /* 居中对齐 */
-       }
-       .pagination button {
-           margin: 0 15px; /* 增加按钮之间的间距 */
-           background-color: #D9534F; /* 更改为红色背景 */
-           color: white; /* 白色文字 */
-           border: none; /* 去掉边框 */
-           border-radius: 5px;
-           padding: 10px 15px;
-           cursor: pointer; /* 鼠标指针 */
-           transition: background-color 0.3s;
-       }
-       .pagination button:hover {
-           background-color: #c9443e; /* 鼠标悬停时的颜色 */
-       }
-       .pagination input {
-           width: 60px; /* 固定宽度 */
-           padding: 8px;
-           margin-left: 5px;
-           border: 2px solid #D9534F; /* 绿色边框 */
-           border-radius: 5px;
-           text-align: center; /* 文本居中 */
-       }
-       .pagination input:focus {
-           border-color: #D9534F; /* 聚焦时的边框颜色 */
-           outline: none; /* 去掉默认的轮廓 */
-       }
-    </style>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .content {
+        display: none;
+        margin-top: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 20px;
+    }
+    h1 {
+        color: #333;
+    }
+    button {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #45a049; /* Darker green */
+    }
+    table {
+        margin-top: 20px;
+    }
+    /* 新添加的样式 */
+    #searchInput {
+        padding: 10px;
+        margin-right: 10px;
+        border: 2px solid #D9534F; /* 更改为红色边框 */
+        border-radius: 5px;
+        background-color: #f9f9f9; /* 浅灰色背景 */
+        width: 200px; /* 固定宽度 */
+        transition: border-color 0.3s;
+    }
+    #searchInput:focus {
+        border-color: #D9534F; /* 聚焦时的边框颜色更改为红色 */
+        outline: none; /* 去掉默认的轮廓 */
+    }
+    .pagination {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* 居中对齐 */
+    }
+    .pagination button {
+        margin: 0 15px; /* 增加按钮之间的间距 */
+        background-color: #D9534F; /* 更改为红色背景 */
+        color: white; /* 白色文字 */
+        border: none; /* 去掉边框 */
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer; /* 鼠标指针 */
+        transition: background-color 0.3s;
+    }
+    .pagination button:hover {
+        background-color: #c9443e; /* 鼠标悬停时的颜色 */
+    }
+    .pagination input {
+        width: 60px; /* 固定宽度 */
+        padding: 8px;
+        margin-left: 5px;
+        border: 2px solid #D9534F; /* 绿色边框 */
+        border-radius: 5px;
+        text-align: center; /* 文本居中 */
+    }
+    .pagination input:focus {
+        border-color: #D9534F; /* 聚焦时的边框颜色 */
+        outline: none; /* 去掉默认的轮廓 */
+    }
+</style>
 
+<div id="newsListContainer">
     <h1>用户管理</h1>
     <!-- 添加搜索框和按钮 -->
+    <!-- 将 onclick="searchUsers()" 改为 id="searchBtn" -->
     <div>
         <input type="text" placeholder="搜索用户..." id="searchInput">
-        <button style="background-color: #D9534F;" onclick="searchUsers()">搜索</button>
+        <button style="background-color: #D9534F;" id="searchBtn">搜索</button>
     </div>
 
     <table>
         <thead>
-            <tr>
-                <th>用户名</th>
-                <th>账户</th>
-                <th>密码</th>
-                <th>绑定的邮箱</th>
-                <th>绑定的电话</th>
-                <th>注册日期</th>
-                <th>操作</th>
-            </tr>
+        <tr>
+            <th>用户名</th>
+            <th>账户</th>
+            <th>密码</th>
+            <th>绑定的邮箱</th>
+            <th>绑定的电话</th>
+            <th>注册日期</th>
+            <th>操作</th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>用户1</td>
-                <td>zsy142400</td>
-                <td>123456</td>
-                <td>user1@example.com</td>
-                <td>19983361993</td>
-                <td>2023-01-01</td>
-                <td><button onclick="editUser('用户1')">编辑</button> <button onclick="deleteUser('用户1')">删除</button> <button onclick="viewUserDetails('用户1')">查看</button></td>
-            </tr>
-            <tr>
-                <td>用户2</td>
-                <td>zsy142400</td>
-                <td>123456</td>
-                <td>user1@example.com</td>
-                <td>19983361993</td>
-                <td>2023-01-01</td>
-                <td><button onclick="editUser('用户2')">编辑</button> <button onclick="deleteUser('用户2')">删除</button> <button onclick="viewUserDetails('用户2')">查看</button></td>
-            </tr>
-            <!-- 以添加更多用户 -->
         </tbody>
     </table>
-        <!-- 添加分页按钮 -->
-        <div class="pagination">
-            <button onclick="prevPage()">上一页</button>
-            <span>当前页: <span id="currentPage">1</span></span>
-            <button onclick="nextPage()">下一页</button>
-            <input type="number" id="jumpPageInput" placeholder="跳转到页数">
-            <button onclick="jumpToPage()">跳转</button>
-        </div>
+    <!-- 修改分页按钮部分 -->
+    <div class="pagination">
+        <button id="prevBtn">上一页</button>
+        <span>当前页: <span id="currentPage">1</span></span>
+        <span style="margin-left: 10px;">共 <span id="totalPages">0</span> 页</span>
+        <button id="nextBtn">下一页</button>
+        <input type="number"
+               id="jumpPageInput"
+               placeholder="跳转到页数"
+               min="1">
+        <button id="jumpBtn">跳转</button>
+    </div>
+</div>
 
-    <script>
-      
-    </script>
+
+<script type="text/javascript">
+    (function() {
+        console.log('定义 NewsListManager');
+
+        // 确保在全局作用域定义 NewsListManager
+        window.NewsListManager = {
+            currentPage: 1,
+            pageSize: 5,
+            totalPages: 1,
+            initialized: false,
+
+            init: function() {
+                if (this.initialized) return;
+                console.log('NewsListManager 初始化开始');
+                this.initialized = true;
+                this.bindEvents();
+                this.fetchNewsList();
+            },
+
+            // 确保在初始化时正确绑定事件
+            bindEvents: function() {
+                console.log('绑定事件');
+
+                document.getElementById('searchBtn')?.addEventListener('click', () => this.searchNews());
+
+                // 修改分页按钮的事件绑定
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const jumpBtn = document.getElementById('jumpBtn');
+                // 修改搜索按钮的事件绑定
+                const searchBtn = document.getElementById('searchBtn');
+                if (searchBtn) {
+                    searchBtn.addEventListener('click', () => this.searchNews());
+                }
+
+                // 添加搜索框回车事件
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            this.searchNews();
+                        }
+                    });
+                }
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => this.prevPage());
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => this.nextPage());
+                }
+
+                if (jumpBtn) {
+                    jumpBtn.addEventListener('click', () => this.jumpToPage());
+                }
+            },
+
+            // 在 renderNewsList 函数中修改操作列
+            renderNewsList: function (userList) {
+                console.log(`渲染用户列表, 第 ${this.currentPage} 页, 数据:`, userList);
+                const tbody = document.querySelector('tbody');
+
+                if (!userList || userList.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">暂无数据</td></tr>';
+                    return;
+                }
+
+                // 根据当前页码计算起始和结束索引
+                const startIndex = (this.currentPage - 1) * this.pageSize;
+                const endIndex = Math.min(startIndex + this.pageSize, userList.length);
+                const pageData = userList.slice(startIndex, endIndex);
+
+                console.log(`当前页=${this.currentPage}, 显示数据范围: ${startIndex} - ${endIndex}`);
+
+                tbody.innerHTML = pageData.map(user => {
+                    const userId = user.id || '';
+                    return `
+            <tr>
+                <td>${user.username || '无用户名'}</td>
+                <td>${user.id || '无账户'}</td>
+                <td>${user.password || '无密码'}</td>
+                <td>${user.email || '无邮箱'}</td>
+                <td>${user.phone || '无电话'}</td>
+                <td>${user.date || '未知日期'}</td>
+                <td>
+                    ${userId ? `
+                        <button onclick="NewsListManager.deleteNews('${userId}')"
+                                style="background-color: #D9534F;">删除</button>
+                    ` : '操作不可用'}
+                </td>
+            </tr>
+        `;
+                }).join('');
+
+                // 滚动到页面顶部
+                window.scrollTo(0, 0);
+            },
+
+
+            updatePagination: function() {
+                console.log(`更新分页信息: 当前页=${this.currentPage}, 总页数=${this.totalPages}`);
+
+                // 更新显示
+                document.getElementById('currentPage').textContent = this.currentPage;
+                document.getElementById('totalPages').textContent = this.totalPages;
+
+                // 更新按钮状态
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+
+                if (prevBtn) {
+                    prevBtn.disabled = this.currentPage <= 1;
+                    prevBtn.style.opacity = this.currentPage <= 1 ? '0.5' : '1';
+                }
+
+                if (nextBtn) {
+                    nextBtn.disabled = this.currentPage >= this.totalPages;
+                    nextBtn.style.opacity = this.currentPage >= this.totalPages ? '0.5' : '1';
+                }
+
+                // 更新跳转输入框
+                const jumpPageInput = document.getElementById('jumpPageInput');
+                if (jumpPageInput) {
+                    jumpPageInput.max = this.totalPages;
+                    jumpPageInput.placeholder = `1-${this.totalPages}`;
+                }
+            },
+
+            // 修改翻页方法
+            nextPage: function() {
+                console.log(`尝试跳转到下一页: 当前页=${this.currentPage}, 总页数=${this.totalPages}`);
+                if (this.currentPage < this.totalPages) {
+                    this.currentPage++;
+                    this.fetchNewsList();
+                }
+            },
+
+            prevPage: function() {
+                console.log(`尝试跳转到上一页: 当前页=${this.currentPage}`);
+                if (this.currentPage > 1) {
+                    this.currentPage--;
+                    this.fetchNewsList();
+                }
+            },
+
+            jumpToPage: function() {
+                console.log('尝试跳转到指定页');
+                const jumpPageInput = document.getElementById('jumpPageInput');
+                const pageNum = parseInt(jumpPageInput.value);
+
+                if (!pageNum || pageNum < 1 || pageNum > this.totalPages) {
+                    alert(`请输入有效的页码！(1-${this.totalPages})`);
+                    jumpPageInput.value = '';
+                    return;
+                }
+
+                this.currentPage = pageNum;
+                this.fetchNewsList();
+                jumpPageInput.value = '';
+            },
+
+            // 添加处理空结果的辅助方法
+            handleEmptyResult: function() {
+                this.renderEmptyResult('暂无数据');
+                this.totalPages = 1;
+                this.currentPage = 1;
+                this.updatePagination();
+            },
+            // 添加渲染空结果的辅助方法
+            renderEmptyResult: function(message) {
+                const tbody = document.querySelector('tbody');
+                if (tbody) {
+                    tbody.innerHTML = `<tr><td colspan="7" style="text-align: center;">${message}</td></tr>`;
+                }
+            },
+            // 修改搜索方法
+            searchNews: function() {
+                console.log('执行搜索');
+                const searchInput = document.getElementById('searchInput');
+                const keyword = searchInput ? searchInput.value.trim() : '';
+
+                // 重置页码
+                this.currentPage = 1;
+
+                // 如果搜索框为空，恢复显示所有数据
+                if (!keyword) {
+                    searchInput.value = '';
+                }
+
+                this.fetchNewsList();
+            },
+            fetchNewsList: function() {
+                console.log('开始获取用户列表');
+                const searchInput = document.getElementById('searchInput');
+                const keyword = searchInput ? searchInput.value.trim() : '';
+
+                // 构建查询参数
+                const params = {
+                    pageNum: this.currentPage,
+                    pageSize: this.pageSize
+                };
+
+                // 只有在有搜索关键词时才添加username参数
+                if (keyword) {
+                    params.username = keyword;
+                    console.log('执行模糊搜索，关键词:', keyword);
+                }
+
+                const url = keyword
+                    ? 'http://localhost:8080/admin/search'
+                    : 'http://localhost:8080/admin/list';
+
+                console.log('请求URL:', url);
+                console.log('请求参数:', params);
+
+                axios({
+                    url: url,
+                    method: 'post',
+                    data: params,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => {
+                        // 添加详细的响应数据日志
+                        console.log('完整响应数据:', response.data);
+                        console.log('响应数据结构:', {
+                            code: response.data.code,
+                            msg: response.data.msg,
+                            data: {
+                                pageNum: response.data.data?.pageNum,
+                                pageSize: response.data.data?.pageSize,
+                                pages: response.data.data?.pages,
+                                list: response.data.data?.list,
+                                listLength: response.data.data?.list?.length
+                            }
+                        });
+
+                        if (response.data.code === 200) {
+                            const pageInfo = response.data.data;
+
+                            if (pageInfo) {
+                                // 设置分页信息
+                                this.totalPages = Math.max(1, pageInfo.pages || 1);
+                                this.currentPage = pageInfo.pageNum || 1;
+
+                                const dataList = pageInfo.list || [];
+                                console.log(`查询结果详情:`, {
+                                    currentPage: this.currentPage,
+                                    totalPages: this.totalPages,
+                                    dataLength: dataList.length,
+                                    firstItem: dataList[0],
+                                    keyword: keyword
+                                });
+
+                                if (keyword && dataList.length === 0) {
+                                    this.renderEmptyResult(`未找到包含 "${keyword}" 的用户`);
+                                } else {
+                                    this.renderNewsList(dataList);
+                                }
+
+                                this.updatePagination();
+                            } else {
+                                console.log('pageInfo 为空');
+                                this.handleEmptyResult();
+                            }
+                        } else {
+                            console.error('请求失败:', response.data.msg);
+                            this.handleEmptyResult();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('请求发生错误:', error);
+                        this.handleEmptyResult();
+                    });
+            },
+
+            deleteNews: function(userId) {
+                console.log('删除用户:', userId);
+                if (!userId) {
+                    alert('无效的用户ID');
+                    return;
+                }
+
+                if (!confirm('确定要删除这个用户吗？')) return;
+
+                axios({
+                    url: 'http://localhost:8080/admin/delete',
+                    method: 'post',  // 注意：这里使用 post 方法
+                    data: { id: userId },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => {
+                        console.log('删除用户响应:', response);
+                        if (response.data.code === 200) {
+                            alert('删除成功');
+                            this.fetchNewsList(); // 重新加载列表
+                        } else {
+                            alert(`删除失败：${response.data.msg || '未知错误'}`);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('删除用户失败:', error);
+                        alert(`删除失败：${error.message || '未知错误'}`);
+                    });
+            },
+
+            // 添加编辑用户的函数
+            // 修改编辑用户的方法
+            editUser: function(userId) {
+                console.log('编辑用户:', userId);
+
+                // 从当前表格数据中获取用户信息
+                const currentUserData = this.getCurrentUserData(userId);
+                if (currentUserData) {
+                    // 先发送请求到后端
+                    axios({
+                        url: 'http://localhost:8080/admin/update',
+                        method: 'post',
+                        data: { id: userId },
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(() => {
+                            // 不管后端响应如何，都显示模态框
+                            this.showEditModal(currentUserData);
+                        })
+                        .catch(error => {
+                            console.error('请求发送失败:', error);
+                            // 即使请求失败，也显示模态框
+                            this.showEditModal(currentUserData);
+                        });
+                } else {
+                    alert('获取用户信息失败');
+                }
+            },
+            // 获取当前用户数据的辅助方法
+            getCurrentUserData: function(userId) {
+                const tbody = document.querySelector('tbody');
+                if (!tbody) return null;
+
+                const rows = tbody.getElementsByTagName('tr');
+                for (let row of rows) {
+                    const cells = row.getElementsByTagName('td');
+                    if (cells[1] && cells[1].textContent == userId) {
+                        return {
+                            id: userId,
+                            username: cells[0].textContent,
+                            password: cells[2].textContent,
+                            email: cells[3].textContent,
+                            phone: cells[4].textContent,
+                            date: cells[5].textContent
+                        };
+                    }
+                }
+                return null;
+            },
+
+            // 显示编辑模态框
+            showEditModal: function (userData) {
+                // 创建模态框背景
+                const modalOverlay = document.createElement('div');
+                modalOverlay.className = 'modal-overlay';
+                modalOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    `;
+                // 创建模态框内容
+                const modalContent = document.createElement('div');
+                modalContent.className = 'modal-content';
+                modalContent.style.cssText = `
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        max-width: 90%;
+    `;
+
+                modalContent.innerHTML = `
+        <h2 style="margin-top: 0; color: #333;">编辑用户</h2>
+        <form id="editUserForm" style="display: flex; flex-direction: column; gap: 15px;">
+            <input type="hidden" name="id" value="${userData.id}">
+
+            <div class="form-group">
+                <label>用户名：</label>
+                <input type="text" name="username" value="${userData.username}"
+                       style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+
+            <div class="form-group">
+                <label>密码：</label>
+                <input type="password" name="password" value="${userData.password}"
+                       style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+
+            <div class="form-group">
+                <label>邮箱：</label>
+                <input type="email" name="email" value="${userData.email}"
+                       style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+
+            <div class="form-group">
+                <label>电话：</label>
+                <input type="tel" name="phone" value="${userData.phone}"
+                       style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                <button type="button" class="cancel-btn"
+                        style="padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; background: #6c757d; color: white;">
+                    取消
+                </button>
+                <button type="submit"
+                        style="padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; background: #5bc0de; color: white;">
+                    保存
+                </button>
+            </div>
+        </form>
+    `;
+
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    `;
+                // ESC键关闭模态框
+                const escHandler = (e) => {
+                    if (e.key === 'Escape') {
+                        overlay.remove();
+                        modal.remove();  // 添加这行
+                        document.removeEventListener('keydown', escHandler);
+                    }
+                };
+                document.addEventListener('keydown', escHandler);
+                document.body.appendChild(modal);
+            }
+        }
+
+        // 自动初始化
+        console.log('等待 DOM 加载完成');
+        setTimeout(() => {
+            if (!window.NewsListManager.initialized) {
+                console.log('执行自动初始化');
+                window.NewsListManager.init();
+            }
+        }, 100);
+    })();
+</script>
