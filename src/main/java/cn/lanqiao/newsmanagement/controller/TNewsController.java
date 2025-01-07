@@ -1,5 +1,4 @@
 package cn.lanqiao.newsmanagement.controller;
-
 import cn.lanqiao.newsmanagement.model.pojo.TNews;
 import cn.lanqiao.newsmanagement.service.TNewsService;
 import cn.lanqiao.newsmanagement.utils.ResponseUtils;
@@ -17,7 +16,7 @@ public class TNewsController {
     @Autowired
     private TNewsService tNewsService;
     /**
-     * 03-加载新闻数据
+     * 03-加载新闻审核
      */
     @RequestMapping("/selectAllNews")
     public ResponseUtils selectAllNews(Integer pageNum,Integer pageSize) {
@@ -47,7 +46,43 @@ public class TNewsController {
             throw new RuntimeException(e);
         }
     }
+    /**
+     * 03-加载新闻列表
+     */
+    @RequestMapping("/selectAllNewsList")
+    public ResponseUtils selectAllNewsList(
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "3") Integer pageSize) {
+        try {
+            // 确保页码不小于1
+            pageNum = Math.max(1, pageNum);
+            // 计算偏移量，确保不会出现负数
+            Integer offset = Math.max(0, (pageNum - 1) * pageSize);
 
+            List<TNews> tNewsList = tNewsService.selectAllNewsList(pageNum, pageSize);
+            Integer total = tNewsService.selectNewsTotal();
+
+            List<TNews> newsVoList = new ArrayList<>();
+            for (TNews news : tNewsList) {
+                TNews newsVo = new TNews();
+                newsVo.setId(news.getId());
+                newsVo.setTitle(news.getTitle());
+                newsVo.setUsername(news.getUsername());
+                newsVo.setSort(news.getSort());
+                newsVo.setContent(news.getContent());
+                newsVo.setDate(news.getDate());
+                newsVo.setRead(news.getRead());
+                newsVoList.add(newsVo);
+            }
+
+            // 计算总页数
+            Integer totalPages = (total + pageSize - 1) / pageSize;
+            return new ResponseUtils(200, "查询成功", newsVoList, totalPages);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
     //ct
     @RequestMapping("/selectNews")
     public ResponseUtils selectNewsByTitle(String title,Integer pageNum,Integer pageSize) {
@@ -114,14 +149,14 @@ public class TNewsController {
     }
     @RequestMapping("/updateAudit")
     public Integer updateA(String id){
-      return tNewsService.updateAudit(id);
+        return tNewsService.updateAudit(id);
     }
     @RequestMapping("/updateAuditno")
-  public Integer updateB(String id){
-      return tNewsService.updateAuditno(id);
+    public Integer updateB(String id){
+        return tNewsService.updateAuditno(id);
     }
-  @PostMapping("/remarks")
-  public ResponseUtils updateNewsRemakrs(String id, @RequestParam String remarks){
-      return new ResponseUtils(200,"更新成功",tNewsService.updateRemarks(id,remarks));
-  }
+    @PostMapping("/remarks")
+    public ResponseUtils updateNewsRemakrs(String id, @RequestParam String remarks){
+        return new ResponseUtils(200,"更新成功",tNewsService.updateRemarks(id,remarks));
+    }
 }

@@ -18,7 +18,6 @@ public class TNewsServiceImpl implements TNewsService {
     public Integer selectNewsTotal() {
         return tNewsMapper.selectNewsTotal();
     }
-
   @Override
   public Integer updateAudit(String id) {
     return tNewsMapper.updateAudit(id);
@@ -46,6 +45,21 @@ public class TNewsServiceImpl implements TNewsService {
             return null;
         }
     }
+
+    //ct
+    //查询新闻类别功能
+    @Override
+    public List<TNews> selectAllNewsList(Integer pageNum, Integer pageSize) {
+        Integer offset = (pageNum - 1) * pageSize;
+        List<TNews> tNews = tNewsMapper.selectAllNewsList(offset, pageSize);
+        if (tNews != null) {
+            return tNews;
+        } else {
+            return null;
+        }
+    }
+
+
     //按分类查询新闻
     @Override
     public List<TNews> selectNewsBySort(String sort) {
@@ -57,6 +71,7 @@ public class TNewsServiceImpl implements TNewsService {
         }
     }
 
+
     //ct
     @Override
     public List<TNews> selectNewsByTitle(String title) {
@@ -67,5 +82,4 @@ public class TNewsServiceImpl implements TNewsService {
             return null;
         }
     }
-    //ct
 }
