@@ -16,4 +16,5 @@ public class TAdmin {
   private String email;
   private String date;
   private long isDelete;
+  private String userId;
 }

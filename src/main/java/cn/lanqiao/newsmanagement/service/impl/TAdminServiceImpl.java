@@ -57,6 +57,7 @@ public class TAdminServiceImpl implements TAdminService {
         }
     }
 
+
     /**
      * 登录功能
      */
@@ -67,8 +68,9 @@ public class TAdminServiceImpl implements TAdminService {
             TAdmin result = tAdminMapper.login(tAdminQuery);
 
             if (result != null) {
-                // 2. 如果登录成功，更新user_id
-                tAdminMapper.updateUserId(tAdminQuery);
+                // 2. 如果登录成功，更新user_id为用户的id
+                result.setUserId(result.getId());
+                tAdminMapper.updateUserId(result);
                 return result;
             }
 

@@ -69,6 +69,7 @@ public class TAdminController {
 
 
 
+
     /**
      * 登录功能
      */
@@ -76,19 +77,19 @@ public class TAdminController {
     @RequestMapping("/login")
     public ResponseUtils login(@RequestBody TAdminQuery tAdminQuery) {
         try {
-            TAdmin userLogin = tAdminService.login(tAdminQuery);
-            if (userLogin != null) {
-                // 登录成功，返回用户身份
-                return new ResponseUtils(200, "登录成功", userLogin.getIdentity());
+            TAdmin result = tAdminService.login(tAdminQuery);
+            if (result != null) {
+                // 返回完整的用户信息，包括id和identity
+                return new ResponseUtils<>(200, "登录成功", result);
             } else {
-                // 登录失败
-                return new ResponseUtils(500, "登录失败");
+                return new ResponseUtils<>(500, "用户名或密码错误");
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseUtils(500, "登录失败：" + e.getMessage());
+            log.error("登录失败", e);
+            return new ResponseUtils<>(500, "登录失败：" + e.getMessage());
         }
     }
+
 
 
     /**
