@@ -18,8 +18,8 @@ public interface TAdminMapper {
     /**
      * 登录功能
      */
-    @Update("UPDATE t_admin SET user_id = id WHERE username = #{username} AND password = #{password} AND is_delete = 0")
-    void updateUserId(TAdminQuery tAdminQuery);
+    @Update("UPDATE t_admin SET user_id = #{id} WHERE id = #{id}")
+    void updateUserId(TAdmin tAdmin);
 
     @Select("select * from t_admin where username=#{username} and password = #{password} and is_delete=0")
     TAdmin login(TAdminQuery tAdminQuery);
