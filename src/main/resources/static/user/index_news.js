@@ -1,3 +1,4 @@
+
 // 在文件开头添加样式
 const buttonStyles = `
 <style>
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 搜索
     document.body.addEventListener('click', function(event) {
         if (event.target.id === 'search-btn') {
-            selectNews(0)
+            selectNews(1);
         }
     });
 
@@ -222,27 +223,33 @@ function updatePaginationButtons(currentPage, totalPages) {
     };
 }
 
-// 添加搜索功能的完整实现
+// 修改搜索功能的实现
 function selectNews(pageNum) {
-    let title = document.getElementById('news-search').value;
+    let title = document.getElementById('news-search').value.trim();
+
+    // 如果搜索框为空，从第一页开始显示所有新闻
+    if (!title) {
+        loadNews(1);
+        return;
+    }
 
     axios({
         url: 'http://localhost:8080/news/selectNews',
         method: 'get',
         params: {
             title: title,
-            pageNum: pageNum,
+            pageNum: pageNum,  // 使用传入的页码
             pageSize: 3
         }
     }).then(result => {
         if (result.data.code === 200) {
             if (result.data.data && result.data.data.length > 0) {
                 renderNewsList(result.data.data);
-                // 更新分页信息
+                // 使用后端返回的总记录数计算总页数
                 const totalPages = Math.ceil(result.data.data.length / 3);
                 document.getElementById('page-info').innerText =
-                    `第 1 页 / 共 ${totalPages} 页`;
-                updatePaginationButtons(1, totalPages);
+                    `第 ${pageNum} 页 / 共 ${totalPages} 页`;
+                updatePaginationButtons(pageNum, totalPages);
             } else {
                 document.getElementById('news-list').innerHTML =
                     '<div class="news-item">未找到相关新闻</div>';
@@ -260,6 +267,13 @@ function selectNews(pageNum) {
             '<div class="news-item">搜索失败，请稍后重试</div>';
     });
 }
+
+// 修改搜索按钮的事件绑定
+document.body.addEventListener('click', function(event) {
+    if (event.target.id === 'search-btn') {
+        selectNews(1);
+    }
+});
 
 // 渲染新闻列表
 function renderNewsList(newsList) {
@@ -386,18 +400,19 @@ document.getElementById('module-news').addEventListener('click', function() {
 
     // 重新绑定搜索按钮事件
     document.getElementById('search-btn').addEventListener('click', function() {
-        selectNews(0);
+        selectNews(1);
     });
 
-    // 重新绑定分页按钮事件
+    // 修改分页按钮的事件处理
     document.getElementById('prev-page').addEventListener('click', function() {
         const pageInfo = document.getElementById('page-info').innerText;
         const match = pageInfo.match(/第 (\d+) 页/);
         if (match) {
             const currentPage = parseInt(match[1]);
             if (currentPage > 1) {
-                if (currentCategory) {
-                    loadNewsBySort(currentCategory, currentPage - 1);
+                const searchInput = document.getElementById('news-search');
+                if (searchInput.value.trim()) {
+                    selectNews(currentPage - 1);
                 } else {
                     loadNews(currentPage - 1);
                 }
@@ -412,8 +427,9 @@ document.getElementById('module-news').addEventListener('click', function() {
             const currentPage = parseInt(match[1]);
             const totalPages = parseInt(match[2]);
             if (currentPage < totalPages) {
-                if (currentCategory) {
-                    loadNewsBySort(currentCategory, currentPage + 1);
+                const searchInput = document.getElementById('news-search');
+                if (searchInput.value.trim()) {
+                    selectNews(currentPage + 1);
                 } else {
                     loadNews(currentPage + 1);
                 }
@@ -449,3 +465,78 @@ document.getElementById('module-workstation').addEventListener('click', function
         </div>
     `;
 });
+
+// 在搜索函数中修改
+function searchNews() {
+    // 重置当前页码为1
+    currentPage = 1;
+
+    var searchContent = $("#searchInput").val().trim();
+
+    // 发送请求到后端
+    $.ajax({
+        url: "/news/searchNews",
+        type: "GET",
+        data: {
+            "searchContent": searchContent,
+            "currentPage": currentPage,
+            "pageSize": pageSize
+        },
+        success: function(response) {
+            if (response.code == 200) {
+                // 更新新闻列表
+                updateNewsList(response.data.records);
+                // 更新分页信息
+                updatePagination(response.data.total, response.data.current);
+            } else {
+                alert("搜索失败：" + response.msg);
+            }
+        },
+        error: function() {
+            alert("搜索请求失败，请稍后重试");
+        }
+    });
+}
+
+// 修改分页函数
+function goToPage(page) {
+    currentPage = page;
+
+    // 获取当前搜索框的值
+    var searchContent = $("#searchInput").val().trim();
+
+    // 如果搜索框有值，使用搜索接口
+    if (searchContent) {
+        $.ajax({
+            url: "/news/searchNews",
+            type: "GET",
+            data: {
+                "searchContent": searchContent,
+                "currentPage": currentPage,
+                "pageSize": pageSize
+            },
+            success: function(response) {
+                if (response.code == 200) {
+                    updateNewsList(response.data.records);
+                    updatePagination(response.data.total, response.data.current);
+                }
+            }
+        });
+    } else {
+        // 如果搜索框为空，使用普通列表接口
+        $.ajax({
+            url: "/news/list",
+            type: "GET",
+            data: {
+                "currentPage": currentPage,
+                "pageSize": pageSize
+            },
+            success: function(response) {
+                if (response.code == 200) {
+                    updateNewsList(response.data.records);
+                    updatePagination(response.data.total, response.data.current);
+                }
+            }
+        });
+    }
+}
