@@ -498,6 +498,7 @@ function searchNews() {
     });
 }
 
+
 // 修改分页函数
 function goToPage(page) {
     currentPage = page;
